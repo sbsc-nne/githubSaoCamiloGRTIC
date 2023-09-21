@@ -16,7 +16,7 @@ chmod 777 -R $DIR
 echo '##### Download do arquivo criar_diretorios_backups.sh #####'
 
 wget -O /tmp/criar_diretorios_backups.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/criar_diretorios_backups.sh
-sleep 3s
+sleep 1s
 
 sh /tmp/criar_diretorios_backups.sh
 
