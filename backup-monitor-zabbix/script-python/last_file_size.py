@@ -6,5 +6,6 @@
 from info_last_file_bkp import last_file_size
 import sys
 
-path=sys.argv[1]
-last_file_size(path)
+path=sys.argv[1] # Informar como primeiro argumento o caminho do arquivo
+extension=sys.argv[2] # Informar como segundo argumento a extenção Ex: .zip .exe .backup .7z
+last_file_size(path,extension)
