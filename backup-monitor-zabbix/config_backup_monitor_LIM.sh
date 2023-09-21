@@ -33,4 +33,6 @@ echo '##### Download do arquivos zabbix_agentd.d userparameter #####'
 wget -O /etc/zabbix/zabbix_agentd.d/userparameter_info_last_file_bkp.conf https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/unidades/LIM-userparameter_info_last_file_bkp.conf
 wget -O /etc/zabbix/zabbix_agentd.d/userparameter_size_used_storage.conf https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/zabbix_agentd.d/userparameter_size_used_storage.conf
 
+sh criar_diretorios_backups.sh
+
 echo '##### Finalizado #####'
