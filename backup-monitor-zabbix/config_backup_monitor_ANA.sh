@@ -1,7 +1,7 @@
 #!/bin/bash
 # Data Criação: 20-09-2023
 # @Marcelo Grando
-# Script config_backup_monitor Limoeiro do Norte
+# Script config_backup_monitor Ananindeua
 
 echo '##### Iniciando configuração #####'
 

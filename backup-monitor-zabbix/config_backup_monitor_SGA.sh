@@ -16,7 +16,6 @@ chmod 777 -R $DIR
 echo '##### Download do arquivo criar_diretorios_backups.sh #####'
 
 wget -O /tmp/criar_diretorios_backups.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/criar_diretorios_backups.sh
-sleep 1s
 
 sh /tmp/criar_diretorios_backups.sh
 
@@ -33,6 +32,7 @@ echo '##### Download do arquivos zabbix_agentd.d userparameter #####'
 wget -O /etc/zabbix/zabbix_agentd.d/userparameter_info_last_file_bkp.conf https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/unidades/SGA-userparameter_info_last_file_bkp.conf
 wget -O /etc/zabbix/zabbix_agentd.d/userparameter_size_used_storage.conf https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/zabbix_agentd.d/userparameter_size_used_storage.conf
 
+sleep 3s
 sh /etc/zabbix/script-python/mount_storage.sh
 
 echo '##### Finalizado #####'
