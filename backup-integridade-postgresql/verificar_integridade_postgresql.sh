@@ -1,7 +1,9 @@
 #!/bin/bash
 # Data Criação: 24-11-2023
 # @Marcelo Grando
+# dir /home/check_db_pgsql
 # Script verificar_integridade_postgresql.sh
+
 
 ### INICIO - COPIAR ULTIMO BACKUP PARA MAQUINA LOCAL ###
 # Verifica se foi fornecido o parâmetro com as iniciais do nome do arquivo

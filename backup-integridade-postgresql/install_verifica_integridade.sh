@@ -15,3 +15,7 @@ fi
 
 echo '##### Download do arquivo... #####'
 
+wget -O /home/check_db_pgsql/verificar_integridade_postgresql.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-integridade-postgresql/verificar_integridade_postgresql.sh
+wget -O /home/check_db_pgsql/ler_log_integridade_postgresql.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-integridade-postgresql/ler_log_integridade_postgresql.sh
+wget -O /etc/zabbix/zabbix_agentd.d/userparameter_integridade_postgresql.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-integridade-postgresql/userparameter_integridade_postgresql.sh
+
