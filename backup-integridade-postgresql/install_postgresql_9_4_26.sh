@@ -18,6 +18,14 @@ PG_ADDRESS="0.0.0.0 0.0.0.0"
 #LIMPA A CONSOLE
 clear
 
+echo "Informe a senha: "
+#DESATIVA A IMPRESSÃO NA CONSOLE PARA NINGUEM VER A SENHA DIGITADA
+stty -echo
+#COLETA A SENHA DO BANCO DE DADOS
+read PG_PASSWORD
+#ATIVA NOVAMENTE A IMPRESSÃO DE SAÍDA NA CONSOLE
+stty echo
+
 #ATUALIZA O apt-get
 apt-get update -y
 #FAZ DOWNLOAD DA INSTALAÇÃO DO BANCO DE DADOS
@@ -120,13 +128,14 @@ sed -i -e"s/^#log_line_prefix = ''.*$/log_line_prefix = '%t'/" $PG_CONFIG
 sed -i -e"s/^log_timezone = '*'.*$/log_timezone = '-3'/" $PG_CONFIG
 sed -i -e"s/^timezone = '*'.*$/timezone = '-3'/" $PG_CONFIG
 
-echo "Informe a senha: "
-#DESATIVA A IMPRESSÃO NA CONSOLE PARA NINGUEM VER A SENHA DIGITADA
-stty -echo
-#COLETA A SENHA DO BANCO DE DADOS
-read PG_PASSWORD
-#ATIVA NOVAMENTE A IMPRESSÃO DE SAÍDA NA CONSOLE
-stty echo
+# MUDEI PARA O INICIO - MARCELO
+#echo "Informe a senha: "
+##DESATIVA A IMPRESSÃO NA CONSOLE PARA NINGUEM VER A SENHA DIGITADA
+#stty -echo
+##COLETA A SENHA DO BANCO DE DADOS
+#read PG_PASSWORD
+##ATIVA NOVAMENTE A IMPRESSÃO DE SAÍDA NA CONSOLE
+#stty echo
 #COLETA OS DADOS DA REDE DO USUÁRIO: 10.1.1.0/12
 #echo -n "Informe a rede ($PG_ADDRESS): "
 #read PG_ADDRESS
