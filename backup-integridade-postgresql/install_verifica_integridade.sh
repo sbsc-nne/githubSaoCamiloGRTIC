@@ -4,6 +4,16 @@
 # dir = /tmp/install_verifica_integridade.sh
 # Script instar e configurar a validação de integridade do Backup do SystemaH
 
+echo "## ATENÇÃO ## O PostgreSQL precisa esta instalado nesse servidor"
+read -p "Deseja instalar? Informar 1 = SIM | 2 = NÃO : " flag_continuar;
+if [ $flag_continuar = '1' ]
+then
+    echo '##### Baixando arquivo para instalar PostgreSQL 9.4.26 #####'
+    wget -O /tmp/install_postgresql_9_4_26.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-integridade-postgresql/install_postgresql_9_4_26.sh
+    chmod +x /tmp/install_postgresql_9_4_26.sh
+    /tmp/install_postgresql_9_4_26.sh
+fi
+
 echo '##### Iniciando configuração #####'
 
 # Diretorios onde devem estar os scripts
