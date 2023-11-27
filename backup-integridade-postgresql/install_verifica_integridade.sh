@@ -1,6 +1,7 @@
 #!/bin/bash
 # Data Criação: 27-11-2023
 # @Marcelo Grando
+# dir = /tmp/install_verifica_integridade.sh
 # Script instar e configurar a validação de integridade do Backup do SystemaH
 
 echo '##### Iniciando configuração #####'
@@ -22,7 +23,13 @@ wget -O /etc/zabbix/zabbix_agentd.d/userparameter_integridade_postgresql.conf ht
 chmod +x /home/check_db_pgsql/verificar_integridade_postgresql.sh
 chmod +x /home/check_db_pgsql/ler_log_integridade_postgresql.sh
 
+echo '##### Fim Download do arquivo... #####'
+
 echo "# Executar verificação integridade backup SystemaH" >> /etc/crontab
 echo "02 */6 * * *    root    /home/check_db_pgsql/verificar_integridade_postgresql.sh systema" >> /etc/crontab
 
+echo '##### Reiniciar cron... #####'
 /etc/init.d/cron reload 
+
+echo '##### Reiniciar zabbix-agent... #####'
+service zabbix-agent restart
