@@ -21,3 +21,8 @@ wget -O /etc/zabbix/zabbix_agentd.d/userparameter_integridade_postgresql.sh http
 
 chmod +x /home/check_db_pgsql/verificar_integridade_postgresql.sh
 chmod +x /home/check_db_pgsql/ler_log_integridade_postgresql.sh
+
+echo "# Executar verificação integridade backup SystemaH" >> /etc/crontab
+echo "02 */6 * * *    root    /home/check_db_pgsql/verificar_integridade_postgresql.sh systema" >> /etc/crontab
+
+/etc/init.d/cron reload 
