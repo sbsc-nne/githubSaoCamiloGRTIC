@@ -99,13 +99,14 @@ make && make install
 su postgres -c "export LC_CTYPE=en_US.UTF-8 && /opt/PostgreSQL/9.4.26/bin/initdb --data-checksums -D /opt/PostgreSQL/9.4.26/data/"
 
 #COLETA A PORTA PADRÃO DO BANCO DE DADOS
-echo -n "Informe a porta padrão do banco de dados: "
-read PG_PORT
-sed -i -e"s/^#port = 5432.*$/port = $PG_PORT /" $PG_CONFIG
+#echo -n "Informe a porta padrão do banco de dados: "
+#read PG_PORT
+#sed -i -e"s/^#port = 5432.*$/port = $PG_PORT /" $PG_CONFIG
 
 #COLETA O NÚMERO MÁXIMO DE CONEXÕES
-echo -n "Informe o número de conexões ($PG_MAX_CONN): "
-read PG_MAX_CONN
+#echo -n "Informe o número de conexões ($PG_MAX_CONN): "
+#read PG_MAX_CONN
+PG_MAX_CONN=50
 
 #MODIFICA AS CONFIGURAÇÕES DO ARQUIVO postgresql.conf
 sed -i -e"s/^#listen_addresses =.*$/listen_addresses = '*'/" $PG_CONFIG
@@ -127,9 +128,9 @@ read PG_PASSWORD
 #ATIVA NOVAMENTE A IMPRESSÃO DE SAÍDA NA CONSOLE
 stty echo
 #COLETA OS DADOS DA REDE DO USUÁRIO: 10.1.1.0/12
-echo -n "Informe a rede ($PG_ADDRESS): "
-read PG_ADDRESS
-
+#echo -n "Informe a rede ($PG_ADDRESS): "
+#read PG_ADDRESS
+PG_ADDRESS="0.0.0.0 0.0.0.0"
 #INICIALIZA O BANCO DE DADOS
 $PG_START start
 
