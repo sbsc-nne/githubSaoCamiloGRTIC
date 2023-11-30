@@ -27,10 +27,10 @@ $nameLocalFile = Join-Path $directoryDefault (Split-Path $urlFileTaskXML -Leaf)
 # Baixa o arquivo e salva localmente $urlFileTaskXML
 Invoke-WebRequest -Uri $urlFileTaskXML -OutFile $nameLocalFile
 
+# Caminho para o arquivo XML que contém a definição da tarefa agendada
 $pathFullXml = Join-Path -Path $directoryDefault -ChildPath $nameLocalFile
 
-# Caminho para o arquivo XML que contém a definição da tarefa agendada
-$pathFullXml = "C:\Caminho\Para\Seu\Arquivo.xml"
+# ##$pathFullXml = "C:\Caminho\Para\Seu\Arquivo.xml"
 
 # Importa a tarefa agendada a partir do XML
-Register-ScheduledTask -Action (New-ScheduledTaskAction -Execute 'powershell.exe' -Argument "-File $pathFullXml") -TaskName "check_version_files_2"
+Register-ScheduledTask -Action (New-ScheduledTaskAction -Execute 'powershell.exe' -Argument "-File $pathFullXml") -TaskName "check_version_files"
