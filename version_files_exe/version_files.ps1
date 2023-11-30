@@ -1,14 +1,15 @@
 # Lista de caminhos dos arquivos .exe
 $listaDeArquivos = @(
-    "\\10.1.0.100\Systemah2005\Modulos\syscad.exe",
-    "\\10.1.0.111\Fortes\AC\AC.exe",
-    "\\10.1.0.111\Fortes\Ponto\Ponto.exe",
-    "\\10.1.0.111\Fortes\AC\Agente\Agente.exe"
+    "\\192.168.0.250\SystemaH2005\Modulos\syscad.exe",
+    "\\192.168.0.240\c$\Fortes\AC\AC.exe",
+    "\\192.168.0.240\c$\Fortes\Ponto\Ponto.exe",
+    "\\192.168.0.240\c$\Fortes\AC\Agente\Agente.exe",
+    "\\192.168.0.240\c$\WKRadar\Pgms\Radar\WKRadar.exe"
     # Adicione mais caminhos conforme necessário
 )
 
 # Caminho para o arquivo de texto de saída
-$caminhoArquivoSaida = "C:\Users\Administrator\Desktop\output\version_files.txt"
+$caminhoArquivoSaida = "\\192.168.0.246\Backup_FortesAC\check_version_files\version_files.log"
 
 # Exclui o arquivo de saída se ele existir
 Remove-Item -Path $caminhoArquivoSaida -ErrorAction SilentlyContinue

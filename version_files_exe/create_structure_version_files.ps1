@@ -1,12 +1,12 @@
 #!/PowerShell
-# Data Criação: 30  -11-2023
+# Data Criação: 30-11-2023
 # @Marcelo Grando
 # create_structure_version_files.ps1
 # Script estruturar a verificação das versões de arquivos EXE (Monitoramento Zabbix)
 
 # Variáveis
 #$fullPathFileDefault = 'C:\zabbix_agent2\check_version_files\version_files_teste.ps1'
-$directoryDefault = "C:\zabbix_agent2\check_version_files"  #Split-Path $fullPathFileDefault -Parent
+$directoryDefault = "C:\zabbix_agent\check_version_files"  #Split-Path $fullPathFileDefault -Parent
 $urlFileConfig = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_files_exe/version_files.ps1"
 $urlFileTaskXML = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_files_exe/task_check_version_files.xml"
 
@@ -30,7 +30,9 @@ Invoke-WebRequest -Uri $urlFileTaskXML -OutFile $nameLocalFile
 # Caminho para o arquivo XML que contém a definição da tarefa agendada
 $pathFullXml = Join-Path -Path $directoryDefault -ChildPath $nameLocalFile
 
-# ##$pathFullXml = "C:\Caminho\Para\Seu\Arquivo.xml"
+# 
+
+$nameFoldeShedule = "SBSC-SUPERNNE"
 
 # Importa a tarefa agendada a partir do XML
-Register-ScheduledTask -Action (New-ScheduledTaskAction -Execute 'powershell.exe' -Argument "-File $pathFullXml") -TaskName "check_version_files"
+Register-ScheduledTask -Action (New-ScheduledTaskAction -Execute 'powershell.exe' -Argument "-File $pathFullXml") -TaskPath $nameFoldeShedule -TaskName "check_version_files"
