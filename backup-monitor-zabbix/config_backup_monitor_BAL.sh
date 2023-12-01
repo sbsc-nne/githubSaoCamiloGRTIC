@@ -5,7 +5,7 @@
 
 echo '##### Iniciando configuração #####'
 
-DIR_OLD="/etc/zabbix/script"
+DIR_OLD="/etc/zabbix/script-python"
 DIR="/etc/zabbix/script"
 
 if [ -d "$DIR_OLD" ]; then
