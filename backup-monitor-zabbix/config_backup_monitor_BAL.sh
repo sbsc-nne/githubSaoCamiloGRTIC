@@ -63,5 +63,6 @@ if ! mount | grep -q "FortesAC";
 then
   sh /etc/zabbix/script/mount_storage.sh
 fi
+chmod 777 -R $DIR
 
 echo '##### Finalizado #####'
