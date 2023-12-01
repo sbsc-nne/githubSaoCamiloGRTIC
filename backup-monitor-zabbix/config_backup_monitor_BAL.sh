@@ -5,8 +5,14 @@
 
 echo '##### Iniciando configuração #####'
 
-DIR="/etc/zabbix/script-python"
- 
+DIR_OLD="/etc/zabbix/script-python"
+DIR="/etc/zabbix/script"
+
+if [ -d "$DIR_OLD" ]; then
+  # O diretório existe, então vamos excluí-lo
+  rm -rf "$DIR_OLD"
+fi
+
 if [ ! -d "$DIR" ]; then
   mkdir -p $DIR && cd $DIR
 fi
@@ -21,15 +27,22 @@ sh /tmp/criar_diretorios_backups.sh
 
 echo '##### Download do arquivos script-python #####'
 
-wget -O /etc/zabbix/script-python/info_last_file_bkp.py https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script-python/info_last_file_bkp.py
-wget -O /etc/zabbix/script-python/last_file_date.py https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script-python/last_file_date.py
-wget -O /etc/zabbix/script-python/last_file_name.py https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script-python/last_file_name.py
-wget -O /etc/zabbix/script-python/last_file_size.py https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script-python/last_file_size.py
+rm -rf /etc/zabbix/script-python/*
+
+wget -O /etc/zabbix/script-python/last_file_date.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script-python/last_file_date.sh
+wget -O /etc/zabbix/script-python/last_file_name.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script-python/last_file_name.sh
+wget -O /etc/zabbix/script-python/last_file_size.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script-python/last_file_size.sh
 wget -O /etc/zabbix/script-python/mount_storage.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/unidades/BAL-mount_storage.sh
+
 
 echo '##### Download do arquivos zabbix_agentd.d userparameter #####'
 
-wget -O /etc/zabbix/zabbix_agentd.d/userparameter_info_last_file_bkp.conf https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/unidades/BAL-userparameter_info_last_file_bkp.conf
+$fileUserParameter="/etc/zabbix/zabbix_agentd.d/userparameter_info_last_file_bkp.conf"
+if [ -e "$fileUserParameter" ]; then
+    rm "$fileUserParameter"
+fi
+
+wget -O $fileUserParameter https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/unidades/BAL-userparameter_info_last_file_bkp.conf
 wget -O /etc/zabbix/zabbix_agentd.d/userparameter_size_used_storage.conf https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/zabbix_agentd.d/userparameter_size_used_storage.conf
 
 sleep 3s
