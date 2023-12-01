@@ -35,4 +35,6 @@ $pathFullXml = Join-Path -Path $directoryDefault -ChildPath $nameLocalFile
 $nameFoldeShedule = "SBSC-SUPERNNE"
 
 # Importa a tarefa agendada a partir do XML
+
+####### CORRIGIR ESSA LINHA AQUI #######
 Register-ScheduledTask -Action (New-ScheduledTaskAction -Execute 'powershell.exe' -Argument "-File $pathFullXml") -TaskPath $nameFoldeShedule -TaskName "check_version_files"

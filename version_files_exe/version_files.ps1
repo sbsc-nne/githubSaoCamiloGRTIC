@@ -16,7 +16,7 @@ Remove-Item -Path $caminhoArquivoSaida -ErrorAction SilentlyContinue
 
 # Adicionar data e hora no arquivo de saída
 $dataHora = Get-Date -Format "dd/MM/yyyy HH:mm"
-Add-Content -Path $caminhoArquivoSaida -Value " DataHora: $dataHora"
+Add-Content -Path $caminhoArquivoSaida -Value "DataHora: $dataHora"
 
 # Laço FOR para percorrer a lista de arquivos
 foreach ($caminhoArquivo in $listaDeArquivos) {
