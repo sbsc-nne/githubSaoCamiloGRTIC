@@ -65,4 +65,7 @@ then
 fi
 chmod 777 -R $DIR
 
+echo '##### Configurando Crontab #####'
+sed -i 's/@reboot         root    sh /etc/zabbix/script-python/mount_storage.sh/@reboot         root    sh /etc/zabbix/script/mount_storage.sh/g' /etc/crontab
+
 echo '##### Finalizado #####'
