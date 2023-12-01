@@ -21,14 +21,18 @@ chmod 777 -R $DIR
 
 echo '##### Download do arquivo criar_diretorios_backups.sh #####'
 
+# Baixar o arquivo para criar os diretorios que serão usados no mapeamento
 wget -O /tmp/criar_diretorios_backups.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/criar_diretorios_backups.sh
 
+# Executar o arquivo para criar os diretorios que serão usados no mapeamento
 sh /tmp/criar_diretorios_backups.sh
 
 echo '##### Download do arquivos script #####'
 
+# Limpa a pasta de scripts antes de fazer o download dos arquivos novos
 rm -rf /etc/zabbix/script/*
 
+# Baixar os arquivos de configuração
 wget -O /etc/zabbix/script/last_file_date.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script/last_file_date.sh
 wget -O /etc/zabbix/script/last_file_name.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script/last_file_name.sh
 wget -O /etc/zabbix/script/last_file_size.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script/last_file_size.sh
@@ -37,15 +41,22 @@ wget -O /etc/zabbix/script/mount_storage.sh https://github.com/mgran2003/GITHUB-
 
 echo '##### Download do arquivos zabbix_agentd.d userparameter #####'
 
-$fileUserParameter="/etc/zabbix/zabbix_agentd.d/userparameter_info_last_file_bkp.conf"
-if [ -e "$fileUserParameter" ]; then
-    rm "$fileUserParameter"
+# Remover o arquivo userparameter_info_last_file_bkp.conf antes de baixar a nova versão
+$infoLastFile="/etc/zabbix/zabbix_agentd.d/userparameter_info_last_file_bkp.conf"
+if [ -e "$infoLastFile" ]; then
+    rm "$infoLastFile"
 fi
-
+$sizeUsedStorage="/etc/zabbix/zabbix_agentd.d/userparameter_size_used_storage.conf"
+if [ -e "$sizeUsedStorage" ]; then
+    rm "$sizeUsedStorage"
+fi
+# Baixar os arquivos userparameter_info_last_file_bkp.conf
 wget -O $fileUserParameter https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/unidades/BAL-userparameter_info_last_file_bkp.conf
-wget -O /etc/zabbix/zabbix_agentd.d/userparameter_size_used_storage.conf https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/zabbix_agentd.d/userparameter_size_used_storage.conf
+wget -O $sizeUsedStorage https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/zabbix_agentd.d/userparameter_size_used_storage.conf
 
 sleep 3s
+
+# Exetuda o arquivo para montar as pastas da Storage
 sh /etc/zabbix/script/mount_storage.sh
 
 echo '##### Finalizado #####'
