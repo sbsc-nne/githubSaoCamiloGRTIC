@@ -44,19 +44,24 @@ echo '##### Download do arquivos zabbix_agentd.d userparameter #####'
 # Remover o arquivo userparameter_info_last_file_bkp.conf antes de baixar a nova versão
 $infoLastFile="/etc/zabbix/zabbix_agentd.d/userparameter_info_last_file_bkp.conf"
 if [ -e "$infoLastFile" ]; then
-    rm "$infoLastFile"
+  rm "$infoLastFile"
+  echo '##### Arquivo userparameter_info_last_file_bkp.conf excluido #####'
 fi
 $sizeUsedStorage="/etc/zabbix/zabbix_agentd.d/userparameter_size_used_storage.conf"
 if [ -e "$sizeUsedStorage" ]; then
-    rm "$sizeUsedStorage"
+  rm "$sizeUsedStorage"
+  echo '##### Arquivo userparameter_size_used_storage.conf excluido #####'
 fi
 # Baixar os arquivos userparameter_info_last_file_bkp.conf
-wget -O $fileUserParameter https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/unidades/BAL-userparameter_info_last_file_bkp.conf
-wget -O $sizeUsedStorage https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/zabbix_agentd.d/userparameter_size_used_storage.conf
+wget -O /etc/zabbix/zabbix_agentd.d/userparameter_info_last_file_bkp.conf https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/unidades/BAL-userparameter_info_last_file_bkp.conf
+wget -O /etc/zabbix/zabbix_agentd.d/userparameter_size_used_storage.conf https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/zabbix_agentd.d/userparameter_size_used_storage.conf
 
 sleep 3s
 
 # Exetuda o arquivo para montar as pastas da Storage
-sh /etc/zabbix/script/mount_storage.sh
+if ! mount | grep -q "FortesAC";
+then
+  sh /etc/zabbix/script/mount_storage.sh
+fi
 
 echo '##### Finalizado #####'
