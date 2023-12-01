@@ -12,29 +12,25 @@ fi
 # Parâmetro 1 - Diretório específico
 diretorio=$1
 # Parâmetro 2 - parte do nome do arquivo  
-parte_nome_arquivo=$2
-
-# Busca pelos arquivos no diretório especificado
-arquivo_mais_novo=""
-data_modificacao=""
-
-for arquivo in "$diretorio"/*"$parte_nome_arquivo"*; do
-    if [ -f "$arquivo" ]; then
-        # Obter informações do arquivo usando stat
-        info=$(stat --format="%Y %y %s" "$arquivo")
-        timestamp=$(echo $info | cut -d' ' -f1)
-        data_modificacao=$(date -d "@$timestamp" '+%d/%m/%Y %H:%M:%S')
-
-        # Verifica se é o arquivo mais recente
-        if [ -z "$arquivo_mais_novo" ] || [ "$data_modificacao" -nt "$(date -r "$arquivo_mais_novo")" ]; then
-            arquivo_mais_novo="$arquivo"
-        fi
-    fi
-done
-
-# Exibe informações do arquivo mais recente
-if [ -z "$arquivo_mais_novo" ]; then
-    echo "Nenhum arquivo encontrado com o padrão fornecido."
-else
-    echo "$data_modificacao"
+parte_do_nome=$2
+# Verifica se o diretório existe
+if [ ! -d "$diretorio" ]; then
+    echo "Diretório não encontrado: $diretorio"
+    exit 1
 fi
+
+# Encontrar arquivos correspondentes e obter o mais recente
+arquivo_mais_novo=$(ls -1t "$diretorio"/*"$parte_do_nome"* 2>/dev/null | head -n 1)
+
+# Verifica se foi encontrado algum arquivo
+if [ -z "$arquivo_mais_novo" ]; then
+    echo "Nenhum arquivo encontrado no diretório."
+    exit 1
+fi
+# Obtém informações da data do arquivo
+info=$(stat --format="%Y %y %s" "$arquivo_mais_novo")
+timestamp=$(echo $info | cut -d' ' -f1)
+data_criacao=$(date -d "@$timestamp" '+%d/%m/%Y %H:%M:%S')
+
+# Exibe as informações
+echo "$data_criacao"
