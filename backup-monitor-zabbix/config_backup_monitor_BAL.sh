@@ -1,5 +1,6 @@
 #!/bin/bash
 # Data Criação: 20-09-2023
+# Data Atualização: 04-12-2023
 # @Marcelo Grando
 # Script config_backup_monitor Balsas
 
@@ -36,8 +37,8 @@ rm -rf /etc/zabbix/script/*
 wget -O /etc/zabbix/script/last_file_date.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script/last_file_date.sh
 wget -O /etc/zabbix/script/last_file_name.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script/last_file_name.sh
 wget -O /etc/zabbix/script/last_file_size.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script/last_file_size.sh
+wget -O /etc/zabbix/script/validar_backup.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script/validar_backup.sh
 wget -O /etc/zabbix/script/mount_storage.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/unidades/BAL-mount_storage.sh
-
 
 echo '##### Download do arquivos zabbix_agentd.d userparameter #####'
 
@@ -56,7 +57,7 @@ fi
 wget -O /etc/zabbix/zabbix_agentd.d/userparameter_info_last_file_bkp.conf https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/unidades/BAL-userparameter_info_last_file_bkp.conf
 wget -O /etc/zabbix/zabbix_agentd.d/userparameter_size_used_storage.conf https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/zabbix_agentd.d/userparameter_size_used_storage.conf
 
-sleep 3s
+sleep 2s
 
 # Exetuda o arquivo para montar as pastas da Storage
 if ! mount | grep -q "FortesAC";
@@ -65,8 +66,7 @@ then
 fi
 chmod 777 -R $DIR
 
-echo '##### Configurando Crontab #####'
-
-sed -i -e"s/^@reboot         root    sh /etc/zabbix/script-python/mount_storage.sh.*$/@reboot         root    sh /etc/zabbix/script/mount_storage.sh/" /etc/crontab
-
 echo '##### Finalizado #####'
+echo '##### Configurando Crontab #####'
+echo '##### Deverá ser configurado manualmente o crontab: vi /etc/crontab #####'
+echo '##### Linha comando para add: @reboot         root    sh /etc/zabbix/script/mount_storage.sh'

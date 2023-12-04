@@ -1,12 +1,19 @@
 #!/bin/bash
 # Data Criação: 20-09-2023
+# Data Atualização: 04-12-2023
 # @Marcelo Grando
-# Script config_backup_monitor Balsas
+# Script config_backup_monitor Crateús UPA
 
 echo '##### Iniciando configuração #####'
 
+DIR_OLD="/etc/zabbix/script-python"
 DIR="/etc/zabbix/script"
- 
+
+if [ -d "$DIR_OLD" ]; then
+  # O diretório existe, então vamos excluí-lo
+  rm -rf "$DIR_OLD"
+fi
+
 if [ ! -d "$DIR" ]; then
   mkdir -p $DIR && cd $DIR
 fi
@@ -15,24 +22,51 @@ chmod 777 -R $DIR
 
 echo '##### Download do arquivo criar_diretorios_backups.sh #####'
 
+# Baixar o arquivo para criar os diretorios que serão usados no mapeamento
 wget -O /tmp/criar_diretorios_backups.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/criar_diretorios_backups.sh
 
+# Executar o arquivo para criar os diretorios que serão usados no mapeamento
 sh /tmp/criar_diretorios_backups.sh
 
 echo '##### Download do arquivos script #####'
 
-wget -O /etc/zabbix/script/info_last_file_bkp.py https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script/info_last_file_bkp.py
-wget -O /etc/zabbix/script/last_file_date.py https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script/last_file_date.py
-wget -O /etc/zabbix/script/last_file_name.py https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script/last_file_name.py
-wget -O /etc/zabbix/script/last_file_size.py https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script/last_file_size.py
+# Limpa a pasta de scripts antes de fazer o download dos arquivos novos
+rm -rf /etc/zabbix/script/*
+
+# Baixar os arquivos de configuração
+wget -O /etc/zabbix/script/last_file_date.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script/last_file_date.sh
+wget -O /etc/zabbix/script/last_file_name.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script/last_file_name.sh
+wget -O /etc/zabbix/script/last_file_size.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script/last_file_size.sh
+wget -O /etc/zabbix/script/validar_backup.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script/validar_backup.sh
 wget -O /etc/zabbix/script/mount_storage.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/unidades/CTU_UPA-mount_storage.sh
 
 echo '##### Download do arquivos zabbix_agentd.d userparameter #####'
 
+# Remover o arquivo userparameter_info_last_file_bkp.conf antes de baixar a nova versão
+$infoLastFile="/etc/zabbix/zabbix_agentd.d/userparameter_info_last_file_bkp.conf"
+if [ -e "$infoLastFile" ]; then
+  rm "$infoLastFile"
+  echo '##### Arquivo userparameter_info_last_file_bkp.conf excluido #####'
+fi
+$sizeUsedStorage="/etc/zabbix/zabbix_agentd.d/userparameter_size_used_storage.conf"
+if [ -e "$sizeUsedStorage" ]; then
+  rm "$sizeUsedStorage"
+  echo '##### Arquivo userparameter_size_used_storage.conf excluido #####'
+fi
+# Baixar os arquivos userparameter_info_last_file_bkp.conf
 wget -O /etc/zabbix/zabbix_agentd.d/userparameter_info_last_file_bkp.conf https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/unidades/CTU_UPA-userparameter_info_last_file_bkp.conf
 wget -O /etc/zabbix/zabbix_agentd.d/userparameter_size_used_storage.conf https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/zabbix_agentd.d/userparameter_size_used_storage.conf
 
-sleep 3s
-sh /etc/zabbix/script/mount_storage.sh
+sleep 2s
+
+# Exetuda o arquivo para montar as pastas da Storage
+if ! mount | grep -q "FortesAC";
+then
+  sh /etc/zabbix/script/mount_storage.sh
+fi
+chmod 777 -R $DIR
 
 echo '##### Finalizado #####'
+echo '##### Configurando Crontab #####'
+echo '##### Deverá ser configurado manualmente o crontab: vi /etc/crontab #####'
+echo '##### Linha comando para add: @reboot         root    sh /etc/zabbix/script/mount_storage.sh'
