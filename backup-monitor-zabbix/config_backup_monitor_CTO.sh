@@ -57,7 +57,7 @@ fi
 wget -O /etc/zabbix/zabbix_agentd.d/userparameter_info_last_file_bkp.conf https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/unidades/CTO-userparameter_info_last_file_bkp.conf
 wget -O /etc/zabbix/zabbix_agentd.d/userparameter_size_used_storage.conf https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/zabbix_agentd.d/userparameter_size_used_storage.conf
 
-sleep 3s
+sleep 2s
 
 # Exetuda o arquivo para montar as pastas da Storage
 if ! mount | grep -q "FortesAC";
