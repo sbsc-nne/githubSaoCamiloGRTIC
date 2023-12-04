@@ -38,6 +38,7 @@ wget -O /etc/zabbix/script/last_file_date.sh https://github.com/mgran2003/GITHUB
 wget -O /etc/zabbix/script/last_file_name.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script/last_file_name.sh
 wget -O /etc/zabbix/script/last_file_size.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script/last_file_size.sh
 wget -O /etc/zabbix/script/mount_storage.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/unidades/CTO-mount_storage.sh
+wget -O /etc/zabbix/script/validar_backup.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/unidades/validar_backup.sh
 
 
 echo '##### Download do arquivos zabbix_agentd.d userparameter #####'
@@ -69,4 +70,3 @@ chmod 777 -R $DIR
 echo '##### Finalizado #####'
 echo '##### Configurando Crontab #####'
 echo '##### Deverá ser configurado manualmente o crontab: vi /etc/crontab #####'
-echo '##### Linha de comando para ser add: @reboot         root    sh /etc/zabbix/script/mount_storage.sh #####'
