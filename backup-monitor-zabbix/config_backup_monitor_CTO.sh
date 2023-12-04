@@ -69,3 +69,4 @@ chmod 777 -R $DIR
 echo '##### Finalizado #####'
 echo '##### Configurando Crontab #####'
 echo '##### Deverá ser configurado manualmente o crontab: vi /etc/crontab #####'
+echo '#\@reboot         root    sh /etc/zabbix/script/mount_storage.sh'
