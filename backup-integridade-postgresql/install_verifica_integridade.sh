@@ -2,7 +2,7 @@
 # Data Criação: 27-11-2023
 # @Marcelo Grando
 # dir = /tmp/install_verifica_integridade.sh
-# Script instar e configurar a validação de integridade do Backup do SystemaH
+# Script instalar e configurar a validação de integridade do Backup do SystemaH
 
 echo "## ATENÇÃO ## O PostgreSQL precisa esta instalado nesse servidor"
 read -p "Deseja instalar? Informar 1 = SIM | 2 = NÃO : " flag_continuar;
@@ -25,6 +25,11 @@ DIR2="/home/check_db_pgsql/logs_backup"
 if [ ! -d "$DIR1" ]; then
   mkdir -p $DIR1
   mkdir -p $DIR2
+else 
+  DIR1_TMP = "${DIR1}/*"
+  DIR2_TMP = "${DIR2}/*"
+  rm -rf $DIR1_TMP
+  rm -rf $DIR2_TMP
 fi
 
 echo '##### Download do arquivo... #####'
