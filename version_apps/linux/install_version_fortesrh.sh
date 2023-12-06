@@ -5,6 +5,8 @@
 # Script instalar e configurar leitura da versão do FortesRH.
 
 # Verifica se foi fornecido o parâmetro com as iniciais do nome do arquivo
+clear
+echo '## Iniciando configuração... ##'
 if [ $# -eq 0 ]; then
   echo "Por favor, informe o IP do servidor do Fortes RH"
   exit 1
@@ -55,12 +57,14 @@ SQL_QUERY2="GRANT SELECT ON TABLE public.parametrosdosistema to saocamilo;"
 
 # Executa o comando psql
 #psql -h $DB_HOST -p $DB_PORT -d $DB_NAME -U $DB_USER -W $DB_PASSWORD -c "$SQL_QUERY"
-
+echo '## Criando usuário e permitindo GRANT SELECT na tabela... ##'
 # Executa a consulta e armazena o resultado na variável
 psql -h $DB_HOST -p $DB_PORT -d $DB_NAME -U $DB_USER -c "$SQL_QUERY1"
 psql -h $DB_HOST -p $DB_PORT -d $DB_NAME -U $DB_USER -c "$SQL_QUERY2"
 
+echo '## Baixando os arquivos de configuração... ##'
 # Baixar os arquivos de configuração
 wget -O /etc/zabbix/script/verificar_versao_fortesrh.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/linux/verificar_versao_fortesrh.sh
 wget -O /etc/zabbix/zabbix_agentd.d/userparameter_info_version_fortesrh.conf https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/linux/userparameter_info_version_fortesrh.conf
+echo '## Finalizado... ##'
 
