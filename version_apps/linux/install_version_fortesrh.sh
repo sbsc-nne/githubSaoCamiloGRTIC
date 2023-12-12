@@ -68,5 +68,10 @@ wget -O /etc/zabbix/script/verificar_versao_fortesrh.sh https://github.com/mgran
 wget -O /etc/zabbix/zabbix_agentd.d/userparameter_info_version_fortesrh.conf https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/linux/userparameter_info_version_fortesrh.conf
 
 chmod 777 /etc/zabbix/script/verificar_versao_fortesrh.sh
+
+sleep 3
+
+sed "s/192.168.0.245/$ip_server_fortesrh/" /etc/zabbix/script/verificar_versao_fortesrh.sh
+
 echo '## Finalizado... ##'
 
