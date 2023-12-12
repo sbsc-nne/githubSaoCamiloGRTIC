@@ -14,6 +14,7 @@ if (-not $ipZabbixProxy) {
     Write-Host "Informar o IP do Zabbix Proxy via parametro -ipZabbixProxy. O script será encerrado."
     exit
 }
+
 $directory1 = "C:\zabbix"
 $directory2 = "C:\zabbix\zabbix_agent2.conf.d"
 $directory3 = "C:\zabbix\script"
