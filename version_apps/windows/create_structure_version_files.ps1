@@ -5,15 +5,27 @@
 # Script estruturar a verificação das versões de arquivos EXE (Monitoramento Zabbix)
 
 # Variáveis
-#$fullPathFileDefault = 'C:\zabbix_agent2\check_version_files\version_files_teste.ps1'
-$directoryDefault = "C:\zabbix_agent\check_version_files"  #Split-Path $fullPathFileDefault -Parent
-$urlFileConfig = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_files_exe/version_files.ps1"
-$urlFileTaskXML = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_files_exe/task_check_version_files.xml"
 
-# Criar um diretório
-if (-not (Test-Path -Path $directoryDefault -PathType Container)) {
-    New-Item -Path $directoryDefault -ItemType Directory
+$directory1 = "C:\zabbix\zabbix_agent2.conf.d"
+$directory2 = "C:\zabbix\script"
+$urlUserParameter = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_files_exe/version_files.ps1"
+$urlVersionFileWinPs1 = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_files_exe/task_check_version_files.xml"
+
+# Criar diretórios
+if (-not (Test-Path -Path $directory1 -PathType Container)) {
+    New-Item -Path $directory1 -ItemType Directory
+    Write-Host "Diretório $directory1 criado com Sucesso!"
+} else {
+    Write-Host "O diretório $directory1 já existe."
 }
+
+if (-not (Test-Path -Path $directory2 -PathType Container)) {
+    New-Item -Path $directory2 -ItemType Directory
+    Write-Host "Diretório $directory2 criado com Sucesso!"
+} else {
+    Write-Host "O diretório $directory2 já existe."
+}
+
 
 # Nome do arquivo local (extraído do URL) $urlFileConfig
 $nameLocalFile = Join-Path $directoryDefault (Split-Path $urlFileConfig -Leaf)
