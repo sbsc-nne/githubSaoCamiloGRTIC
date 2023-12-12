@@ -8,7 +8,7 @@
 clear
 echo '## Iniciando configuração... ##'
 if [ $# -eq 0 ]; then
-  echo "Por favor, informe o IP do servidor do Fortes RH"
+  echo "Por favor, informe o IP do servidor do Fortes RH como parametro!"
   exit 1
 fi
 
