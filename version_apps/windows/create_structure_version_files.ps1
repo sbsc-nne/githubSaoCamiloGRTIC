@@ -52,6 +52,7 @@ if (-not (Test-Path -Path $directory3 -PathType Container)) {
 $nameLocalFile = Join-Path $directory1 (Split-Path $urlInstallZabbixAgent2Bat -Leaf)
 # Baixa o arquivo e salva localmente $urlInstallZabbixAgent2Bat
 Invoke-WebRequest -Uri $urlInstallZabbixAgent2Bat -OutFile $nameLocalFile
+$nameFileInstallZabbixAgent2Bat = $nameLocalFile
 
 # Nome do arquivo local (extraído do URL) $urlZabbixAgent2Conf
 $nameLocalFile = Join-Path $directory1 (Split-Path $urlZabbixAgent2Conf -Leaf)
@@ -105,29 +106,8 @@ if ($linha2 -ge 1 -and $linha2 -le $linhas.Count) {
     Write-Host "Número de linha inválido."
 }
 
-# ####Instalar o servico do Zabbix Agent ####
-Write-Host "Instalando o Serviço do Zabbix Agent 2..."
-# Nome do serviço
-$nomeDoServico = "Zabbix Agent 2"
-
-# Executável do serviço
-$caminhoDoExecutavel = "C:\zabbix\zabbix_agent2.exe -i -c C:\zabbix\zabbix_agent2.conf"
-
-# Descrição do serviço (opcional)
-$descricaoDoServico = "Zabbix Agent 2"
-
-# Configuração do serviço
-$configuracaoDoServico = @{
-    DisplayName = $nomeDoServico
-    Description = $descricaoDoServico
-    BinaryPathName = $caminhoDoExecutavel
-}
-
-# Instala o serviço
-New-Service @configuracaoDoServico
-
-# Inicia o serviço
-Start-Service -Name $nomeDoServico
-
-# Exibir mensagem
-Write-Host "Serviço instalado e iniciado com sucesso: $nomeDoServico"
+# ####Instalar o servico do Zabbix Agent através do arquivo .bat ####
+Write-Host "Instalando o Zabbix Agent 2 com serviço."
+# Executar o arquivo .bat
+Start-Process -FilePath $nameFileInstallZabbixAgent2Bat -Wait
+Write-Host "Instalacao do Zabbix Agent 2 concluida."
