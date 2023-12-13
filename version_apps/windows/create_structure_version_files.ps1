@@ -27,27 +27,27 @@ $urlUserParameter           = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRT
 $urlVersionFileWinPs1       = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/version_file_win.ps1"
 
 
-# Criar diretórios
+# Criar Diretorios
 
 if (-not (Test-Path -Path $directory1 -PathType Container)) {
     New-Item -Path $directory1 -ItemType Directory
-    Write-Host "Diretório $directory1 criado com Sucesso!"
+    Write-Host "Diretorio $directory1 criado com Sucesso!"
 } else {
-    Write-Host "O diretório $directory1 já existe."
+    Write-Host "O diretorio $directory1 já existe."
 }
 
 if (-not (Test-Path -Path $directory2 -PathType Container)) {
     New-Item -Path $directory2 -ItemType Directory
-    Write-Host "Diretório $directory2 criado com Sucesso!"
+    Write-Host "Diretorio $directory2 criado com Sucesso!"
 } else {
-    Write-Host "O diretório $directory2 já existe."
+    Write-Host "O Diretorio $directory2 já existe."
 }
 
 if (-not (Test-Path -Path $directory3 -PathType Container)) {
     New-Item -Path $directory3 -ItemType Directory
-    Write-Host "Diretório $directory3 criado com Sucesso!"
+    Write-Host "Diretorio $directory3 criado com Sucesso!"
 } else {
-    Write-Host "O diretório $directory3 já existe."
+    Write-Host "O Diretorio $directory3 já existe."
 }
 
 # Nome do arquivo local (extraído do URL) $urlInstallZabbixAgent2Bat
@@ -106,7 +106,7 @@ if ($linha1 -ge 1 -and $linha1 -le $linhas.Count) {
     $linhas | Set-Content -Path $nameFileZabbixAgentConf
     Write-Host "Linha modificada com sucesso."
 } else {
-    Write-Host "Número de linha inválido."
+    Write-Host "Numero de linha invalido."
 }
 
 if ($linha2 -ge 1 -and $linha2 -le $linhas.Count) {
@@ -116,11 +116,11 @@ if ($linha2 -ge 1 -and $linha2 -le $linhas.Count) {
     $linhas | Set-Content -Path $nameFileZabbixAgentConf
     Write-Host "Linha modificada com sucesso."
 } else {
-    Write-Host "Número de linha inválido."
+    Write-Host "Numero de linha invalido."
 }
 
 # ####Instalar o servico do Zabbix Agent através do arquivo .bat ####
-Write-Host "Instalando o Zabbix Agent 2 com serviço."
+Write-Host "Instalando o Zabbix Agent 2 com servico..."
 # Executar o arquivo .bat
 Start-Process -FilePath $nameFileInstallZabbixAgent2Bat -Wait
 Write-Host "Instalacao do Zabbix Agent 2 concluida."
