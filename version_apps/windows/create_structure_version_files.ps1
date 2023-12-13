@@ -18,11 +18,13 @@ if (-not $ipZabbixProxy) {
 $directory1 = "C:\zabbix"
 $directory2 = "C:\zabbix\zabbix_agent2.conf.d"
 $directory3 = "C:\zabbix\script"
-$urlInstallZabbixAgent2Bat = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/zabbix-5.0/windows/InstallZabbixAgent2.bat"
-$urlZabbixAgent2Conf = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/zabbix-5.0/windows/zabbix_agent2.conf"
-$urlZabbixAgent2Exe = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/zabbix-5.0/windows/zabbix_agent2.exe"
-$urlUserParameter = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/userparameter_version_file_win.conf"
-$urlVersionFileWinPs1 = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/version_file_win.ps1"
+$urlInstallZabbixAgent2Bat  = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/zabbix-5.0/windows/InstallZabbixAgent2.bat"
+$urlZabbixAgent2Conf        = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/zabbix-5.0/windows/zabbix_agent2.conf"
+$urlZabbixAgent2Exe         = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/zabbix-5.0/windows/zabbix_agent2.exe"
+$urlZabbixGetExe            = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/zabbix-5.0/windows/zabbix_get.exe"
+$urlZabbixSerderExe         = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/zabbix-5.0/windows/zabbix_sender.exe"
+$urlUserParameter           = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/userparameter_version_file_win.conf"
+$urlVersionFileWinPs1       = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/version_file_win.ps1"
 
 
 # Criar diretórios
@@ -64,6 +66,17 @@ $nameFileZabbixAgentConf = $nameLocalFile
 $nameLocalFile = Join-Path $directory1 (Split-Path $urlZabbixAgent2Exe -Leaf)
 # Baixa o arquivo e salva localmente $urlZabbixAgent2Exe
 Invoke-WebRequest -Uri $urlZabbixAgent2Exe -OutFile $nameLocalFile
+
+# Nome do arquivo local (extraído do URL) $urlZabbixGetExe
+$nameLocalFile = Join-Path $directory1 (Split-Path $urlZabbixGetExe -Leaf)
+# Baixa o arquivo e salva localmente $urlZabbixGetExe
+Invoke-WebRequest -Uri $urlZabbixGetExe -OutFile $nameLocalFile
+
+# Nome do arquivo local (extraído do URL) $urlZabbixSerderExe
+$nameLocalFile = Join-Path $directory1 (Split-Path $urlZabbixSerderExe -Leaf)
+# Baixa o arquivo e salva localmente $urlZabbixSerderExe
+Invoke-WebRequest -Uri $urlZabbixSerderExe -OutFile $nameLocalFile
+
 
 # Nome do arquivo local (extraído do URL) $urlUserParameter
 $nameLocalFile = Join-Path $directory2 (Split-Path $urlUserParameter -Leaf)
