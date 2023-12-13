@@ -53,39 +53,46 @@ if (-not (Test-Path -Path $directory3 -PathType Container)) {
 # Nome do arquivo local (extraído do URL) $urlInstallZabbixAgent2Bat
 $nameLocalFile = Join-Path $directory1 (Split-Path $urlInstallZabbixAgent2Bat -Leaf)
 # Baixa o arquivo e salva localmente $urlInstallZabbixAgent2Bat
+Write-Host "Iniciando download do arquivo: $nameLocalFile"
 Invoke-WebRequest -Uri $urlInstallZabbixAgent2Bat -OutFile $nameLocalFile
 $nameFileInstallZabbixAgent2Bat = $nameLocalFile
 
 # Nome do arquivo local (extraído do URL) $urlZabbixAgent2Conf
 $nameLocalFile = Join-Path $directory1 (Split-Path $urlZabbixAgent2Conf -Leaf)
 # Baixa o arquivo e salva localmente $urlZabbixAgent2Conf
+Write-Host "Iniciando download do arquivo: $nameLocalFile"
 Invoke-WebRequest -Uri $urlZabbixAgent2Conf -OutFile $nameLocalFile
 $nameFileZabbixAgentConf = $nameLocalFile 
 
 # Nome do arquivo local (extraído do URL) $urlZabbixAgent2Exe
 $nameLocalFile = Join-Path $directory1 (Split-Path $urlZabbixAgent2Exe -Leaf)
 # Baixa o arquivo e salva localmente $urlZabbixAgent2Exe
+Write-Host "Iniciando download do arquivo: $nameLocalFile"
 Invoke-WebRequest -Uri $urlZabbixAgent2Exe -OutFile $nameLocalFile
 
 # Nome do arquivo local (extraído do URL) $urlZabbixGetExe
 $nameLocalFile = Join-Path $directory1 (Split-Path $urlZabbixGetExe -Leaf)
 # Baixa o arquivo e salva localmente $urlZabbixGetExe
+Write-Host "Iniciando download do arquivo: $nameLocalFile"
 Invoke-WebRequest -Uri $urlZabbixGetExe -OutFile $nameLocalFile
 
 # Nome do arquivo local (extraído do URL) $urlZabbixSerderExe
 $nameLocalFile = Join-Path $directory1 (Split-Path $urlZabbixSerderExe -Leaf)
 # Baixa o arquivo e salva localmente $urlZabbixSerderExe
+Write-Host "Iniciando download do arquivo: $nameLocalFile"
 Invoke-WebRequest -Uri $urlZabbixSerderExe -OutFile $nameLocalFile
 
 
 # Nome do arquivo local (extraído do URL) $urlUserParameter
 $nameLocalFile = Join-Path $directory2 (Split-Path $urlUserParameter -Leaf)
 # Baixa o arquivo e salva localmente $urlUserParameter
+Write-Host "Iniciando download do arquivo: $nameLocalFile"
 Invoke-WebRequest -Uri $urlUserParameter -OutFile $nameLocalFile
 
 # Nome do arquivo local (extraído do URL) $urlVersionFileWinPs1
 $nameLocalFile = Join-Path $directory3 (Split-Path $urlVersionFileWinPs1 -Leaf)
 # Baixa o arquivo e salva localmente $urlVersionFileWinPs1
+Write-Host "Iniciando download do arquivo: $nameLocalFile"
 Invoke-WebRequest -Uri $urlVersionFileWinPs1 -OutFile $nameLocalFile
 
 # ### Configurar os parametros no arquivo zabbix_agent2.conf
@@ -104,7 +111,7 @@ if ($linha1 -ge 1 -and $linha1 -le $linhas.Count) {
     $linhas[$linha1 - 1] = $conteudoLinha1
     # Escreve o conteúdo modificado de volta no arquivo
     $linhas | Set-Content -Path $nameFileZabbixAgentConf
-    Write-Host "Linha modificada com sucesso."
+    Write-Host "Arquivo $nameFileZabbixAgentConf modificado com sucesso."
 } else {
     Write-Host "Numero de linha invalido."
 }
@@ -114,7 +121,7 @@ if ($linha2 -ge 1 -and $linha2 -le $linhas.Count) {
     $linhas[$linha2 - 1] = $conteudoLinha2
     # Escreve o conteúdo modificado de volta no arquivo
     $linhas | Set-Content -Path $nameFileZabbixAgentConf
-    Write-Host "Linha modificada com sucesso."
+    Write-Host "Arquivo $nameFileZabbixAgentConf modificado com sucesso."
 } else {
     Write-Host "Numero de linha invalido."
 }
