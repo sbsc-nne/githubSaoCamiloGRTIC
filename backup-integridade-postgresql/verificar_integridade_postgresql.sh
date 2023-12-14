@@ -25,6 +25,9 @@ diretorio_destino="/home/check_db_pgsql/logs_backup"
 # criar o arquivo de log
 arquivo_log=$diretorio_destino"/"$nomearquivo
 
+# Remover arquivos de backups antigos com erro
+rm $diretorio_destino"/*.backup"
+
 # inicia a gravação do LOG
 echo "DataHora: $data_verficacao" >> $arquivo_log 2>&1
 echo "Iniciando cópia do backup" >> $arquivo_log 2>&1
