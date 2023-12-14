@@ -83,6 +83,7 @@ for BACKUP_FILE in $BACKUP_FILES; do
     # NAO FUNCIONA /opt/PostgreSQL/9.4.26/bin/pg_restore --dbname="temp_$DB_NAME" --username="$DB_USER" --no-password --no-owner --no-privileges "$BACKUP_FILE" > /dev/null
     /opt/PostgreSQL/9.4.26/bin/pg_restore --username="$DB_USER" --dbname="temp_$DB_NAME" --no-password --list "$BACKUP_FILE" > /dev/null
     
+    data_verficacao=$(date +"%d/%m/%Y %H:%M:%S")
     # Verificar se o comando pg_restore foi bem-sucedido
     if [ $? -eq 0 ]; then
         echo "Restore realizado com sucesso." >> $arquivo_log 2>&1
