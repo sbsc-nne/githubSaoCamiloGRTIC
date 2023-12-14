@@ -25,8 +25,7 @@ diretorio_destino="/home/check_db_pgsql/logs_backup"
 # criar o arquivo de log
 arquivo_log=$diretorio_destino"/"$nomearquivo
 
-# Remover arquivos de backups antigos com erro
-rm $diretorio_destino"/*.backup"
+
 
 # inicia a gravação do LOG
 echo "DataHora: $data_verficacao" >> $arquivo_log 2>&1
@@ -82,28 +81,25 @@ for BACKUP_FILE in $BACKUP_FILES; do
     # Extrai o nome do arquivo sem a extensão
     FILENAME=$(basename "$BACKUP_FILE" .backup)
     echo "Checando Integridade do arquivo: $BACKUP_FILES." >> $arquivo_log 2>&1
+    
     # Comando para restaurar o despejo e verificar a integridade
-    # NAO FUNCIONA /opt/PostgreSQL/9.4.26/bin/pg_restore --dbname="temp_$DB_NAME" --username="$DB_USER" --no-password --no-owner --no-privileges "$BACKUP_FILE" > /dev/null
+    
     /opt/PostgreSQL/9.4.26/bin/pg_restore --username="$DB_USER" --dbname="temp_$DB_NAME" --no-password --list "$BACKUP_FILE" > /dev/null
     
+    # Atualizar a data e hora da variável
     data_verficacao=$(date +"%d/%m/%Y %H:%M:%S")
     # Verificar se o comando pg_restore foi bem-sucedido
     if [ $? -eq 0 ]; then
         echo "Restore realizado com sucesso." >> $arquivo_log 2>&1
         echo "CHECKLIST_INTEGRIDADE: OK   $data_verficacao    $BACKUP_FILES" >> $arquivo_log 2>&1
+        rm $diretorio_destino"/*.backup"
     else
         echo "Erro ao restaurar backup $BACKUP_FILES." >> $arquivo_log 2>&1
         echo "CHECKLIST_INTEGRIDADE: ERROR    $data_verficacao    $BACKUP_FILES" >> $arquivo_log 2>&1
+        rm $diretorio_destino"/*.backup"
         exit 1
     fi
-    # Verifica a integridade do arquivo usando o utilitário pg_restore
-    #/opt/PostgreSQL/9.4.26/bin/pg_restore --username="$DB_USER" --dbname="temp_$DB_NAME" --no-password --list "$BACKUP_FILE" > /dev/null
-    # Verifica se o comando pg_restore foi bem-sucedido
-    #if [ $? -ne 0 ]; then
-    #    echo "Erro: Falha na verificação de integridade do arquivo $FILENAME." >> $arquivo_log 2>&1
-    #    exit 1
-    #fi
-    rm $BACKUP_FILE
+
 done
 
 echo "Verificação de integridade concluída com sucesso." >> $arquivo_log 2>&1
