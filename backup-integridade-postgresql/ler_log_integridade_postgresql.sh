@@ -1,7 +1,7 @@
 #!/bin/bash
 # Data Criação: 24-11-2023
 # @Marcelo Grando
-# dir /home/check_db_pgsql
+# dir /etc/zabbix/check_db_pgsql
 # Script verificar_integridade_postgresql.sh
 
 
@@ -18,7 +18,7 @@ fi
 #nomearquivo=log_backup-$hoje.log
 
 # Diretório de origem
-diretorio_origem="/home/check_db_pgsql/logs_backup"
+diretorio_origem="/etc/zabbix/check_db_pgsql/logs_backup"
 
 iniciais=$1
 
