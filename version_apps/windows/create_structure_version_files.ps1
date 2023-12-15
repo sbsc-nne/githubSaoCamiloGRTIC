@@ -30,7 +30,7 @@ $urlZabbixAgent2Exe         = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRT
 $urlZabbixGetExe            = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/zabbix-5.0/windows/zabbix_get.exe"
 $urlZabbixSerderExe         = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/zabbix-5.0/windows/zabbix_sender.exe"
 $urlUserParameter           = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/userparameter_version_file_win.conf"
-$urlVersionFileWinPs1       = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/version_file_win.ps1"
+$urlVersionFileWinBat       = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/version_file_win.bat"
 
 
 # Criar Diretorios
@@ -96,11 +96,11 @@ Write-Host "Iniciando download do arquivo: $nameLocalFile"
 Invoke-WebRequest -Uri $urlUserParameter -OutFile $nameLocalFile
 $nameUserParameter = $nameLocalFile
 
-# Nome do arquivo local (extraído do URL) $urlVersionFileWinPs1
-$nameLocalFile = Join-Path $directory3 (Split-Path $urlVersionFileWinPs1 -Leaf)
-# Baixa o arquivo e salva localmente $urlVersionFileWinPs1
+# Nome do arquivo local (extraído do URL) $urlVersionFileWinBat
+$nameLocalFile = Join-Path $directory3 (Split-Path $urlVersionFileWinBat -Leaf)
+# Baixa o arquivo e salva localmente $urlVersionFileWinBat
 Write-Host "Iniciando download do arquivo: $nameLocalFile"
-Invoke-WebRequest -Uri $urlVersionFileWinPs1 -OutFile $nameLocalFile
+Invoke-WebRequest -Uri $urlVersionFileWinBat -OutFile $nameLocalFile
 
 # ### Configurar os parametros no arquivo zabbix_agent2.conf
 $linha1 = 69  # Server=
