@@ -5,13 +5,19 @@
 # Script estruturar a verificação das versões de arquivos EXE (Monitoramento Zabbix)
 
 # Variáveis
-param (
-    [string]$ipZabbixProxy
-)
-
+#param (
+#    [string]$ipZabbixProxy
+#)
+# Solicitar que o usuário informe um valor
+$ipZabbixProxy = Read-Host "Informe o IP do Zabbix Proxy:"
 # Verifica se a primeira variável foi passada
 if (-not $ipZabbixProxy) {
-    Write-Host "Informar o IP do Zabbix Proxy via parametro -ipZabbixProxy. O script será encerrado."
+    Write-Host "IP do servidor do Zabbix Proxy não foi informado. O script será encerrado."
+    exit
+}
+$ipSystemaH = Read-Host "Informe o IP do Servidor do SystemaH2005:"
+if (-not $ipSystemaH) {
+    Write-Host "IP do servidor do SystemaH não foi informado. O script será encerrado."
     exit
 }
 
@@ -88,6 +94,7 @@ $nameLocalFile = Join-Path $directory2 (Split-Path $urlUserParameter -Leaf)
 # Baixa o arquivo e salva localmente $urlUserParameter
 Write-Host "Iniciando download do arquivo: $nameLocalFile"
 Invoke-WebRequest -Uri $urlUserParameter -OutFile $nameLocalFile
+$nameUserParameter = $nameLocalFile
 
 # Nome do arquivo local (extraído do URL) $urlVersionFileWinPs1
 $nameLocalFile = Join-Path $directory3 (Split-Path $urlVersionFileWinPs1 -Leaf)
@@ -125,6 +132,13 @@ if ($linha2 -ge 1 -and $linha2 -le $linhas.Count) {
 } else {
     Write-Host "Numero de linha invalido."
 }
+
+# Incluir a chave no UserParameter para ver versão do SystemaH2005
+$caminhoExeSystemaH = "\\$ipSystemaH\SystemaH2005\modulos\syscad.exe" 
+$textoParaAdicionar = "UserParameter=ver_systemah, C:\zabbix\script\version_file_win.bat $caminhoExeSystemaH "
+
+# Adiciona o texto ao final do arquivo
+Add-Content -Path $nameUserParameter -Value $textoParaAdicionar
 
 # ####Instalar o servico do Zabbix Agent através do arquivo .bat ####
 Write-Host "Instalando o Zabbix Agent 2 com servico..."

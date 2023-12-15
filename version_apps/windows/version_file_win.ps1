@@ -4,6 +4,9 @@
 # dir = C:\zabbiz\script\version_file_win.ps1
 # Script para retornar versão e nome de um arquivo exe.
 
+# ATENÇÃO: Esse script funciona, porém o Zabbix não consegue executar .ps1 via UserParameter.
+# por esse motivo esse script foi reescrito em .bat
+
 # Declaração de parâmetros
 param (
     [string]$caminhoArquivo,
