@@ -6,13 +6,15 @@
 
 # Verifica se foi fornecido o parâmetro com as iniciais do nome do arquivo
 clear
-echo '## Iniciando configuração... ##'
-if [ $# -eq 0 ]; then
-  echo "Por favor, informe o IP do servidor do Fortes RH como parametro!"
-  exit 1
-fi
+#echo '## Iniciando configuração... ##'
+#if [ $# -eq 0 ]; then
+#  echo "Por favor, informe o IP do servidor do Fortes RH como parametro!"
+#  exit 1
+#fi
 
-ip_server_fortesrh=$1
+#ip_server_fortesrh=$1
+
+read -p "Informar o IP do servidor do FortesRH : " ip_server_fortesrh;
 
 echo "## ATENÇÃO ## O IP: $ip_server_fortesrh é o do servidor do FortesRH está correto?"
 read -p "Informar 1 = SIM | 2 = NÃO : " flag_continuar;
