@@ -29,7 +29,9 @@ $urlZabbixAgent2Conf        = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRT
 $urlZabbixAgent2Exe         = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/zabbix-5.0/windows/zabbix_agent2.exe"
 $urlZabbixGetExe            = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/zabbix-5.0/windows/zabbix_get.exe"
 $urlZabbixSerderExe         = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/zabbix-5.0/windows/zabbix_sender.exe"
-$urlUserParameter           = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/userparameter_version_file_win.conf"
+$urlUserParameterFortes     = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/userparameter_version_file_fortes.conf"
+$urlUserParameterSystema    = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/userparameter_version_file_systemah.conf"
+$urlUserParameterWK         = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/userparameter_version_file_wksistemas.conf"
 $urlVersionFileWinBat       = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/version_file_win.bat"
 
 
@@ -89,12 +91,24 @@ Write-Host "Iniciando download do arquivo: $nameLocalFile"
 Invoke-WebRequest -Uri $urlZabbixSerderExe -OutFile $nameLocalFile
 
 
-# Nome do arquivo local (extraído do URL) $urlUserParameter
-$nameLocalFile = Join-Path $directory2 (Split-Path $urlUserParameter -Leaf)
-# Baixa o arquivo e salva localmente $urlUserParameter
+# Nome do arquivo local (extraído do URL) $urlUserParameterFortes
+$nameLocalFile = Join-Path $directory2 (Split-Path $urlUserParameterFortes -Leaf)
+# Baixa o arquivo e salva localmente $urlUserParameterFortes
 Write-Host "Iniciando download do arquivo: $nameLocalFile"
-Invoke-WebRequest -Uri $urlUserParameter -OutFile $nameLocalFile
-$nameUserParameter = $nameLocalFile
+Invoke-WebRequest -Uri $urlUserParameterFortes -OutFile $nameLocalFile
+
+# Nome do arquivo local (extraído do URL) $urlUserParameterSystema
+$nameLocalFile = Join-Path $directory2 (Split-Path $urlUserParameterSystema -Leaf)
+# Baixa o arquivo e salva localmente $urlUserParameterSystema
+Write-Host "Iniciando download do arquivo: $nameLocalFile"
+Invoke-WebRequest -Uri $urlUserParameterSystema -OutFile $nameLocalFile
+$nameUserParameterSystema = $nameLocalFile
+
+# Nome do arquivo local (extraído do URL) $urlUserParameterWK
+$nameLocalFile = Join-Path $directory2 (Split-Path $urlUserParameterWK -Leaf)
+# Baixa o arquivo e salva localmente $urlUserParameterWK
+Write-Host "Iniciando download do arquivo: $nameLocalFile"
+Invoke-WebRequest -Uri $urlUserParameterWK -OutFile $nameLocalFile
 
 # Nome do arquivo local (extraído do URL) $urlVersionFileWinBat
 $nameLocalFile = Join-Path $directory3 (Split-Path $urlVersionFileWinBat -Leaf)
@@ -138,7 +152,7 @@ $caminhoExeSystemaH = "\\$ipSystemaH\SystemaH2005\modulos\syscad.exe"
 $textoParaAdicionar = @("","UserParameter=version_systemah, C:\zabbix\script\version_file_win.bat $($caminhoExeSystemaH)")
 
 # Adiciona o texto ao final do arquivo
-Add-Content -Path $nameUserParameter -Value $textoParaAdicionar
+Add-Content -Path $nameUserParameterSystema -Value $textoParaAdicionar
 
 # ####Instalar o servico do Zabbix Agent através do arquivo .bat ####
 Write-Host "Instalando o Zabbix Agent 2 com servico..."
