@@ -66,6 +66,14 @@ then
 fi
 chmod 777 -R $DIR
 
+# Inserir a linha no cron para executar o script a cada 6 horas iniciando as 02:00
+echo "# Montar os compartilhamentos com Storage" >> /etc/crontab
+echo "@reboot         root    sh /etc/zabbix/script/mount_storage.sh" >> /etc/crontab
+
+# Reiniciar o serviço do cron
+echo '##### Reiniciar cron... #####'
+/etc/init.d/cron reload 
+
 echo '##### Finalizado #####'
 echo '##### Configurando Crontab #####'
 echo '##### Deverá ser configurado manualmente o crontab: vi /etc/crontab #####'
