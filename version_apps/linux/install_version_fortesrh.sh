@@ -75,5 +75,7 @@ sleep 3
 
 sed "s/192.168.0.245/$ip_server_fortesrh/" /etc/zabbix/script/verificar_versao_fortesrh.sh
 
+sudo systemctl restart zabbix-agent
+
 echo '## Finalizado... ##'
 
