@@ -48,7 +48,7 @@ echo '##### Fim Download do arquivo... #####'
 
 # Inserir a linha no cron para executar o script a cada 6 horas iniciando as 02:00
 echo "# Executar verificação integridade backup SystemaH" >> /etc/crontab
-echo "02 */6 * * *    root    /etc/zabbix/check_db_pgsql/verificar_integridade_postgresql.sh systema" >> /etc/crontab
+echo "0 2,8,14,20 * * *   root    /etc/zabbix/check_db_pgsql/verificar_integridade_postgresql.sh systema" >> /etc/crontab
 
 # Reiniciar o serviço do cron
 echo '##### Reiniciar cron... #####'
