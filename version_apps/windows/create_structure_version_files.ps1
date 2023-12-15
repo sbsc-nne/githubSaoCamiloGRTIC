@@ -146,7 +146,7 @@ Write-Host "Instalando o Zabbix Agent 2 com servico..."
 Start-Process -FilePath $nameFileInstallZabbixAgent2Bat -Wait
 Write-Host "Instalacao do Zabbix Agent 2 concluida."
 
-Start-Sleep -s 3
+Start-Sleep -s 2
 
 # Abre as portas de entrada e saída no Firewall do Windows
 $ports = @(10050)
