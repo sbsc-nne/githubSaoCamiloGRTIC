@@ -34,8 +34,8 @@ $urlUserParameterSystema    = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRT
 $urlUserParameterWK         = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/userparameter_version_file_wksistemas.conf"
 $urlVersionFileWinBat       = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/version_file_win.bat"
 
-# Verifica se o serviço do Zabbix Agent 2 está instalado. 
-# Se estiver, ele para o serviço, exclui o serviço, 
+# Verifica se o servico do Zabbix Agent 2 está instalado. 
+# Se estiver, ele para o servico, exclui o servico, 
 # remove a chave do registro de eventos e exclui a pasta C:\zabbix
 
 # Nome do serviço do Zabbix Agent 2
@@ -44,12 +44,12 @@ $nomeServico = "Zabbix Agent 2"
 # Verifica se o serviço está instalado
 if (Get-Service -Name $nomeServico -ErrorAction SilentlyContinue) {
     # Para o serviço
-    Write-Host "# Para o serviço"
+    Write-Host "# Para o servico"
     Stop-Service -Name $nomeServico -Force
     Start-Sleep -s 2
 
     # Remove o serviço
-    Write-Host "# Remove o serviço"
+    Write-Host "# Remove o servico"
     sc.exe delete $nomeServico
     Start-Sleep -s 2
 
@@ -62,9 +62,9 @@ if (Get-Service -Name $nomeServico -ErrorAction SilentlyContinue) {
     Write-Host "# Remove a pasta C:\zabbix"
     Remove-Item -Path "C:\zabbix" -Force -Recurse
 
-    Write-Host "Serviço do Zabbix Agent 2 removido com sucesso."
+    Write-Host "Servico do Zabbix Agent 2 removido com sucesso."
 } else {
-    Write-Host "O serviço do Zabbix Agent 2 não está instalado."
+    Write-Host "O servico do Zabbix Agent 2 nao esta instalado."
 }
 
 # Criar Diretorios
