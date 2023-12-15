@@ -145,3 +145,19 @@ Write-Host "Instalando o Zabbix Agent 2 com servico..."
 # Executar o arquivo .bat
 Start-Process -FilePath $nameFileInstallZabbixAgent2Bat -Wait
 Write-Host "Instalacao do Zabbix Agent 2 concluida."
+
+Start-Sleep -s 3
+
+# Abre as portas de entrada e saída no Firewall do Windows
+$ports = @(10050)
+
+# Itera sobre as portas e adiciona exceções no Firewall
+foreach ($port in $ports) {
+    # Regra de entrada
+    New-NetFirewallRule -DisplayName "Zabbix Inbound $port" -Direction Inbound -LocalPort $port -Protocol TCP -Action Allow
+
+    # Regra de saída
+    New-NetFirewallRule -DisplayName "Zabbix Outbound $port" -Direction Outbound -LocalPort $port -Protocol TCP -Action Allow
+}
+
+Write-Host "Portas $ports liberadas no Firewall do Windows."
