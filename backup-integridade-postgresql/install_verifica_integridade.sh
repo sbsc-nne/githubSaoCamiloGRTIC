@@ -4,6 +4,7 @@
 # dir = /tmp/install_verifica_integridade.sh
 # Script instalar e configurar a validação de integridade do Backup do SystemaH
 
+echo "Caminho PostgreSQL: $($command -v psql)"
 echo "## ATENÇÃO ## O PostgreSQL precisa esta instalado nesse servidor"
 read -p "Deseja instalar? Informar 1 = SIM | 2 = NÃO : " flag_continuar;
 if [ $flag_continuar = '1' ]
