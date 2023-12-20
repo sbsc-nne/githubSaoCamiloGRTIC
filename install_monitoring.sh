@@ -7,6 +7,8 @@
 #   - backup-monitor-zabbix
 #   - version_apps > linux
 
+clear
+
 echo "### Iniciando o download dos arquivos..."
 
 read -p "Informar o numero correspondente a Unidade? 
