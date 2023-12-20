@@ -3,16 +3,22 @@
 # @Marcelo Grando
 # dir = /tmp/install_verifica_integridade.sh
 # Script instalar e configurar a validação de integridade do Backup do SystemaH
-
-echo "Caminho PostgreSQL: $($command -v psql)"
-echo "## ATENÇÃO ## O PostgreSQL precisa esta instalado nesse servidor"
-read -p "Deseja instalar? Informar 1 = SIM | 2 = NÃO : " flag_continuar;
-if [ $flag_continuar = '1' ]
-then
+clear
+# Verifica se o PostgreSQL está instalado
+if dpkg -l | grep -q postgresql; then
+  echo "O PostgreSQL está instalado."
+else
+  # Pergunta se o usuário deseja instalar o PostgreSQL
+  read -p "O PostgreSQL não está instalado. Deseja instalá-lo? (y/n): " choice
+  if [ "$choice" == "y" ] || [ "$choice" == "Y" ]; then
     echo '##### Baixando arquivo para instalar PostgreSQL 9.4.26 #####'
     wget -O /tmp/install_postgresql_9_4_26.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-integridade-postgresql/install_postgresql_9_4_26.sh
     chmod +x /tmp/install_postgresql_9_4_26.sh
     /tmp/install_postgresql_9_4_26.sh
+  else
+    echo "Você optou por não instalar o PostgreSQL. O Script será encerrado"
+    exit 1
+  fi
 fi
 
 echo '##### Iniciando configuração #####'
@@ -22,7 +28,7 @@ DIR1="/etc/zabbix/check_db_pgsql"
 # Diretorios onde serão salvos os LOGs
 DIR2="/etc/zabbix/check_db_pgsql/logs_backup"
 
-# Criar os diretórios caso não existam.
+# Criar os diretórios caso não existam, caso existam limpar.
 if [ ! -d "$DIR1" ]; then
   mkdir -p $DIR1
   mkdir -p $DIR2

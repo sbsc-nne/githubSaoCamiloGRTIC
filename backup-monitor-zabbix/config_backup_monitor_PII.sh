@@ -4,6 +4,7 @@
 # @Marcelo Grando
 # Script config_backup_monitor Pedro II
 
+clear
 echo '##### Iniciando configuração #####'
 
 DIR_OLD="/etc/zabbix/script-python"

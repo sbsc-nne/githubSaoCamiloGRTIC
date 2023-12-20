@@ -6,13 +6,6 @@
 
 # Verifica se foi fornecido o parâmetro com as iniciais do nome do arquivo
 clear
-#echo '## Iniciando configuração... ##'
-#if [ $# -eq 0 ]; then
-#  echo "Por favor, informe o IP do servidor do Fortes RH como parametro!"
-#  exit 1
-#fi
-
-#ip_server_fortesrh=$1
 
 read -p "Informar o IP do servidor do FortesRH : " ip_server_fortesrh;
 
@@ -24,25 +17,21 @@ then
     exit 1
 fi
 
-
-#Verificar se o psql está instalado
-if command -v psql &> /dev/null
-then
-    echo "## psql já está instalado. ##"
+# Verifica se o PostgreSQL está instalado
+if dpkg -l | grep -q postgresql; then
+  echo "O PostgreSQL está instalado."
 else
-    # Instalar o psql
-    echo "## Instalando psql... ##"
-    sudo apt update
-    sudo apt install postgresql-client -y
-
-    # Verificar se a instalação foi bem-sucedida
-    if command -v psql &> /dev/null
-    then
-        echo "## psql instalado com sucesso. ##"
-    else
-        echo "## Falha ao instalar psql. Verifique o processo de instalação. ##"
-        exit 1
-    fi
+  # Pergunta se o usuário deseja instalar o PostgreSQL
+  read -p "O PostgreSQL não está instalado. Deseja instalá-lo? (y/n): " choice
+  if [ "$choice" == "y" ] || [ "$choice" == "Y" ]; then
+    echo '##### Baixando arquivo para instalar PostgreSQL 9.4.26 #####'
+    wget -O /tmp/install_postgresql_9_4_26.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-integridade-postgresql/install_postgresql_9_4_26.sh
+    chmod +x /tmp/install_postgresql_9_4_26.sh
+    /tmp/install_postgresql_9_4_26.sh
+  else
+    echo "Você optou por não instalar o PostgreSQL. O Script será encerrado"
+    exit 1
+  fi
 fi
 
 # Configurações do banco de dados
