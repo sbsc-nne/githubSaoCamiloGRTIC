@@ -89,7 +89,7 @@ echo '##### Baixando arquivo do ConfigBackupMonitor #####'
 caminhoDestinoBackupMonitor="/tmp/$nomeArquivo"
 caminhoOrigemBackupMonitor="https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/$nomeArquivo"
 wget -O $caminhoDestinoBackupMonitor $caminhoOrigemBackupMonitor
-chown +x $caminhoDestinoBackupMonitor
+chmod +x $caminhoDestinoBackupMonitor
 echo '##### Iniciando a configuracao do ConfigBackupMonitor #####'
 sleep 2
 sh $caminhoDestinoBackupMonitor
@@ -105,7 +105,7 @@ fi
 echo '##### Baixando arquivo do BackupIntegridadePostgreSQL #####'
 sleep 2
 wget -O /tmp/install_verifica_integridade.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-integridade-postgresql/install_verifica_integridade.sh
-chown +x /tmp/install_verifica_integridade.sh
+chmod +x /tmp/install_verifica_integridade.sh
 echo '##### Iniciando a configuracao do BackupIntegridadePostgreSQL #####'
 sleep 2
 sh /tmp/install_verifica_integridade.sh
@@ -120,7 +120,7 @@ fi
 echo '##### Baixando arquivo do VesionAppsFortesRH #####'
 sleep 2
 wget -O /tmp/install_version_fortesrh.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/linux/install_version_fortesrh.sh
-chown +x /tmp/install_version_fortesrh.sh
+chmod +x /tmp/install_version_fortesrh.sh
 echo '##### Iniciando a configuracao do VesionAppsFortesRH #####'
 sleep 2
 sh /tmp/install_version_fortesrh.sh
