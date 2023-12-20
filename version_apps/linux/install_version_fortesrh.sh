@@ -17,8 +17,6 @@ then
     exit 1
 fi
 
-#!/bin/bash
-
 # Verifica se o PostgreSQL está instalado
 if dpkg -l | grep -q postgresql; then
   echo "O PostgreSQL está instalado."
@@ -27,12 +25,13 @@ else
   read -p "O PostgreSQL não está instalado. Deseja instalá-lo? (y/n): " choice
   if [ "$choice" = "y" ] || [ "$choice" = "Y" ]; then
     # Adiciona o repositório do PostgreSQL 9.4
-    sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+    sudo apt-get update -y && sudo apt-get upgrade -y
     wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-
+    echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/postgresql-pgdg.list > /dev/null
+    
     # Atualiza a lista de pacotes e instala o PostgreSQL 9.4
-    sudo apt-get update
-    sudo apt-get install postgresql-9.4
+    sudo apt-get update -y
+    sudo apt-get install postgresql-9.4 -y
   else
     echo "Você optou por não instalar o PostgreSQL."
   fi
