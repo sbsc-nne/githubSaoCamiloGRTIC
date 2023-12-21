@@ -13,7 +13,7 @@ fi
 dado_return=$1
 
 # Configurações do banco de dados
-DB_HOST="192.168.0.245"
+DB_HOST="0.0.0.0"
 DB_PORT="5432"
 DB_NAME="fortesrh"
 DB_USER="saocamilo"
