@@ -23,14 +23,14 @@ if [ "$dado_return" == 1 ]; then
   # Comando SQL SELECT
   SQL_QUERY="select versao as versao_forte_rh from parametrosdosistema;"
   # Executa a consulta e armazena o resultado na variável
-  resultado=$(psql -h $DB_HOST -p $DB_PORT -d $DB_NAME -U $DB_USER -c "$SQL_QUERY" -tA)
+  resultado=$(PGPASSWORD=marcelo psql -h $DB_HOST -p $DB_PORT -d $DB_NAME -U $DB_USER -c "$SQL_QUERY" -tA)
 fi
 
 if [ "$dado_return" == 2 ]; then
   # Comando SQL SELECT
   SQL_QUERY="select acversaowebservicecompativel as versao_ws_compat from parametrosdosistema;"
   # Executa a consulta e armazena o resultado na variável
-  resultado=$(psql -h $DB_HOST -p $DB_PORT -d $DB_NAME -U $DB_USER -c "$SQL_QUERY" -tA)
+  resultado=$(PGPASSWORD=marcelo psql -h $DB_HOST -p $DB_PORT -d $DB_NAME -U $DB_USER -c "$SQL_QUERY" -tA)
 fi
 
 # Exibe o resultado
