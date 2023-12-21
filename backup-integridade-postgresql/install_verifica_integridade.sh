@@ -38,10 +38,7 @@ if [ ! -d "$DIR1" ]; then
   mkdir -p $DIR1
   mkdir -p $DIR2
 else 
-  DIR1_TMP = "${DIR1}/*"
-  DIR2_TMP = "${DIR2}/*"
-  rm -rf $DIR1_TMP
-  rm -rf $DIR2_TMP
+  rm -rf "$DIR1"/*
 fi
 
 echo '##### Download do arquivo... #####'
