@@ -92,11 +92,11 @@ for BACKUP_FILE in $BACKUP_FILES; do
     if [ $? -eq 0 ]; then
         echo "Restore realizado com sucesso." >> $arquivo_log 2>&1
         echo "CHECKLIST_INTEGRIDADE: OK   $data_verficacao    $BACKUP_FILES" >> $arquivo_log 2>&1
-        rm $diretorio_destino"/*.backup"
+        rm $BACKUP_FILES
     else
         echo "Erro ao restaurar backup $BACKUP_FILES." >> $arquivo_log 2>&1
         echo "CHECKLIST_INTEGRIDADE: ERROR    $data_verficacao    $BACKUP_FILES" >> $arquivo_log 2>&1
-        rm $diretorio_destino"/*.backup"
+        rm $BACKUP_FILES
         exit 1
     fi
 

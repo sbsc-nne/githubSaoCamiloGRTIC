@@ -66,7 +66,11 @@ chmod 777 /etc/zabbix/script/verificar_versao_fortesrh.sh
 
 sleep 3
 
-sed "s/192.168.0.245/$ip_server_fortesrh/" /etc/zabbix/script/verificar_versao_fortesrh.sh
+#sed "s/192.168.0.245/$ip_server_fortesrh/" /etc/zabbix/script/verificar_versao_fortesrh.sh
+linhaDB_HOST="DB_HOST=\"$ip_server_fortesrh\""
+
+
+sed -i "16s/DB_HOST="192.168.0.245"/$linhaDB_HOST/" /etc/zabbix/script/verificar_versao_fortesrh.sh
 
 sudo systemctl restart zabbix-agent
 
