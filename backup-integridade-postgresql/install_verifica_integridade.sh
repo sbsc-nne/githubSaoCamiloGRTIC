@@ -39,6 +39,7 @@ if [ ! -d "$DIR1" ]; then
   mkdir -p $DIR2
 else 
   rm -rf "$DIR1"/*
+  mkdir -p $DIR2
 fi
 
 echo '##### Download do arquivo... #####'
