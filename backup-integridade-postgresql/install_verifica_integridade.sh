@@ -20,6 +20,7 @@ else
     # Atualiza a lista de pacotes e instala o PostgreSQL 9.4
     sudo apt-get update -y
     sudo apt-get install postgresql-9.4 -y
+    sudo service postgresql stop
     sudo update-rc.d postgresql disable
   else
     echo "Você optou por não instalar o PostgreSQL."
