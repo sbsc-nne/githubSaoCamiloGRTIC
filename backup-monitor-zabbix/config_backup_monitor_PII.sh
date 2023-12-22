@@ -39,7 +39,7 @@ wget -O /etc/zabbix/script/last_file_date.sh https://github.com/mgran2003/GITHUB
 wget -O /etc/zabbix/script/last_file_name.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script/last_file_name.sh
 wget -O /etc/zabbix/script/last_file_size.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script/last_file_size.sh
 wget -O /etc/zabbix/script/validar_backup.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/script/validar_backup.sh
-wget -O /etc/zabbix/script/mount_storage.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/unidades/LIM-mount_storage.sh
+wget -O /etc/zabbix/script/mount_storage.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/unidades/PII-mount_storage.sh
 
 echo '##### Download do arquivos zabbix_agentd.d userparameter #####'
 
@@ -55,7 +55,7 @@ if [ -e "$sizeUsedStorage" ]; then
   echo '##### Arquivo userparameter_size_used_storage.conf excluido #####'
 fi
 # Baixar os arquivos userparameter_info_last_file_bkp.conf
-wget -O /etc/zabbix/zabbix_agentd.d/userparameter_info_last_file_bkp.conf https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/unidades/LIM-userparameter_info_last_file_bkp.conf
+wget -O /etc/zabbix/zabbix_agentd.d/userparameter_info_last_file_bkp.conf https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/unidades/PII-userparameter_info_last_file_bkp.conf
 wget -O /etc/zabbix/zabbix_agentd.d/userparameter_size_used_storage.conf https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/zabbix_agentd.d/userparameter_size_used_storage.conf
 
 sleep 2s
