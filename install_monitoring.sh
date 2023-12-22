@@ -127,3 +127,10 @@ echo '##### Iniciando a configuracao do VesionAppsFortesRH #####'
 sleep 2
 sh /tmp/install_version_fortesrh.sh
 echo '##### Finalizada a configuracao do VesionAppsFortesRH #####'
+
+# Bloco para baixar returnUserParameter
+echo '##### Baixando arquivo returnUserParameter #####'
+sleep 2
+wget -O /etc/zabbix/script/returnUserParameter.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/returnUserParameter.sh
+chmod +x /etc/zabbix/script/returnUserParameter.sh
+echo '##### Finalizado o download do returnUserParameter #####'
