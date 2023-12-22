@@ -82,51 +82,48 @@ case $flag_continuar in
 esac
 
 read -p "Deseja continuar ConfigBackupMonitor ? Informar 1 = SIM | 2 = NÃO : " flag_continuar;
-if [ $flag_continuar = '2' ]
+if [ $flag_continuar = '1' ]
 then
-    exit 1
+    # Bloco para baixar e configurar o ConfigBackupMonitor
+    echo '##### Baixando arquivo do ConfigBackupMonitor #####'
+    caminhoDestinoBackupMonitor="/tmp/$nomeArquivo"
+    caminhoOrigemBackupMonitor="https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/$nomeArquivo"
+    wget -O $caminhoDestinoBackupMonitor $caminhoOrigemBackupMonitor
+    chmod +x $caminhoDestinoBackupMonitor
+    echo '##### Iniciando a configuracao do ConfigBackupMonitor #####'
+    sleep 2
+    sh $caminhoDestinoBackupMonitor
+    echo '##### Finalizada a configuracao do ConfigBackupMonitor #####'
+    sleep 2
 fi
-# Bloco para baixar e configurar o ConfigBackupMonitor
-echo '##### Baixando arquivo do ConfigBackupMonitor #####'
-caminhoDestinoBackupMonitor="/tmp/$nomeArquivo"
-caminhoOrigemBackupMonitor="https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-monitor-zabbix/$nomeArquivo"
-wget -O $caminhoDestinoBackupMonitor $caminhoOrigemBackupMonitor
-chmod +x $caminhoDestinoBackupMonitor
-echo '##### Iniciando a configuracao do ConfigBackupMonitor #####'
-sleep 2
-sh $caminhoDestinoBackupMonitor
-echo '##### Finalizada a configuracao do ConfigBackupMonitor #####'
-sleep 2
 
 read -p "Deseja continuar BackupIntegridadePostgreSQL ? Informar 1 = SIM | 2 = NÃO : " flag_continuar;
-if [ $flag_continuar = '2' ]
+if [ $flag_continuar = '1' ]
 then
-    exit 1
+    # Bloco para baixar e configurar o BackupIntegridadePostgreSQL
+    echo '##### Baixando arquivo do BackupIntegridadePostgreSQL #####'
+    sleep 2
+    wget -O /tmp/install_verifica_integridade.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-integridade-postgresql/install_verifica_integridade.sh
+    chmod +x /tmp/install_verifica_integridade.sh
+    echo '##### Iniciando a configuracao do BackupIntegridadePostgreSQL #####'
+    sleep 2
+    sh /tmp/install_verifica_integridade.sh
+    echo '##### Finalizada a configuracao do BackupIntegridadePostgreSQL #####'   
 fi
-# Bloco para baixar e configurar o BackupIntegridadePostgreSQL
-echo '##### Baixando arquivo do BackupIntegridadePostgreSQL #####'
-sleep 2
-wget -O /tmp/install_verifica_integridade.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/backup-integridade-postgresql/install_verifica_integridade.sh
-chmod +x /tmp/install_verifica_integridade.sh
-echo '##### Iniciando a configuracao do BackupIntegridadePostgreSQL #####'
-sleep 2
-sh /tmp/install_verifica_integridade.sh
-echo '##### Finalizada a configuracao do BackupIntegridadePostgreSQL #####'
 
 read -p "Deseja continuar VesionAppsFortesRH ? Informar 1 = SIM | 2 = NÃO : " flag_continuar;
-if [ $flag_continuar = '2' ]
+if [ $flag_continuar = '1' ]
 then
-    exit 1
+    # Bloco para baixar e configurar o VesionAppsFortesRH
+    echo '##### Baixando arquivo do VesionAppsFortesRH #####'
+    sleep 2
+    wget -O /tmp/install_version_fortesrh.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/linux/install_version_fortesrh.sh
+    chmod +x /tmp/install_version_fortesrh.sh
+    echo '##### Iniciando a configuracao do VesionAppsFortesRH #####'
+    sleep 2
+    sh /tmp/install_version_fortesrh.sh
+    echo '##### Finalizada a configuracao do VesionAppsFortesRH #####'
 fi
-# Bloco para baixar e configurar o VesionAppsFortesRH
-echo '##### Baixando arquivo do VesionAppsFortesRH #####'
-sleep 2
-wget -O /tmp/install_version_fortesrh.sh https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/linux/install_version_fortesrh.sh
-chmod +x /tmp/install_version_fortesrh.sh
-echo '##### Iniciando a configuracao do VesionAppsFortesRH #####'
-sleep 2
-sh /tmp/install_version_fortesrh.sh
-echo '##### Finalizada a configuracao do VesionAppsFortesRH #####'
 
 # Bloco para baixar returnUserParameter
 echo '##### Baixando arquivo returnUserParameter #####'
