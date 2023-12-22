@@ -8,7 +8,7 @@
 #   - version_apps > linux
 
 # Obtém o endereço IP do servidor da VLAN10
-ipZabbixProxy=$(ifconfig | grep 10.255 | awk '{print $2}')
+ipZabbixProxy=$(ifconfig | grep 10.21 | awk '{print $2}')
 
 echo "Backups Fortes AC"
 zabbix_get -s $ipZabbixProxy -k bkp_ac_last_file_name
