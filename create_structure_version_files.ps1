@@ -158,7 +158,7 @@ Write-Host "Iniciando download do arquivo: $nameLocalFile"
 Invoke-WebRequest -Uri $verificarValidadeCertificadoA1 -OutFile $nameLocalFile
 
 # Nome do arquivo local (extraído do URL) $userparameter_verificarValidadeCertificadoA1
-$nameLocalFile = Join-Path $directory3 (Split-Path $userparameter_verificarValidadeCertificadoA1 -Leaf)
+$nameLocalFile = Join-Path $directory2 (Split-Path $userparameter_verificarValidadeCertificadoA1 -Leaf)
 # Baixa o arquivo e salva localmente $userparameter_verificarValidadeCertificadoA1
 Write-Host "Iniciando download do arquivo: $nameLocalFile"
 Invoke-WebRequest -Uri $userparameter_verificarValidadeCertificadoA1 -OutFile $nameLocalFile
