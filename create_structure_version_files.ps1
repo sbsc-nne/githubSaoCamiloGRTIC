@@ -34,8 +34,9 @@ $urlUserParameterSystema    = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRT
 $urlUserParameterWK         = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/userparameter_version_file_wksistemas.conf"
 $urlVersionFileWinBat       = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/version_file_win.bat"
 # Certificado A1
-$verificarValidadeCertificadoA1                 = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/version_file_win.bat"
-$userparameter_verificarValidadeCertificadoA1   = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/version_file_win.bat"
+$verificarValidadeCertificadoA1 = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/certificadoA1/userparameter_verificarValidadeCertificadoA1.conf"
+$userparameter_verificarValidadeCertificadoA1 = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/version_file_win.bat"
+
 
 # Verifica se o servico do Zabbix Agent 2 está instalado. 
 # Se estiver, ele para o servico, exclui o servico, 
@@ -149,6 +150,18 @@ $nameLocalFile = Join-Path $directory3 (Split-Path $urlVersionFileWinBat -Leaf)
 # Baixa o arquivo e salva localmente $urlVersionFileWinBat
 Write-Host "Iniciando download do arquivo: $nameLocalFile"
 Invoke-WebRequest -Uri $urlVersionFileWinBat -OutFile $nameLocalFile
+
+# Nome do arquivo local (extraído do URL) $verificarValidadeCertificadoA1
+$nameLocalFile = Join-Path $directory3 (Split-Path $verificarValidadeCertificadoA1 -Leaf)
+# Baixa o arquivo e salva localmente $verificarValidadeCertificadoA1
+Write-Host "Iniciando download do arquivo: $nameLocalFile"
+Invoke-WebRequest -Uri $verificarValidadeCertificadoA1 -OutFile $nameLocalFile
+
+# Nome do arquivo local (extraído do URL) $userparameter_verificarValidadeCertificadoA1
+$nameLocalFile = Join-Path $directory3 (Split-Path $userparameter_verificarValidadeCertificadoA1 -Leaf)
+# Baixa o arquivo e salva localmente $userparameter_verificarValidadeCertificadoA1
+Write-Host "Iniciando download do arquivo: $nameLocalFile"
+Invoke-WebRequest -Uri $userparameter_verificarValidadeCertificadoA1 -OutFile $nameLocalFile
 
 # ### Configurar os parametros no arquivo zabbix_agent2.conf
 $linha1 = 69  # Server=
