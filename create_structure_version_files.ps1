@@ -33,6 +33,9 @@ $urlUserParameterFortes     = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRT
 $urlUserParameterSystema    = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/userparameter_version_file_systemah.conf"
 $urlUserParameterWK         = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/userparameter_version_file_wksistemas.conf"
 $urlVersionFileWinBat       = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/version_file_win.bat"
+# Certificado A1
+$verificarValidadeCertificadoA1                 = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/version_file_win.bat"
+$userparameter_verificarValidadeCertificadoA1   = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/version_file_win.bat"
 
 # Verifica se o servico do Zabbix Agent 2 está instalado. 
 # Se estiver, ele para o servico, exclui o servico, 
