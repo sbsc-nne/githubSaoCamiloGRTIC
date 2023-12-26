@@ -34,7 +34,7 @@ $urlUserParameterSystema    = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRT
 $urlUserParameterWK         = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/userparameter_version_file_wksistemas.conf"
 $urlVersionFileWinBat       = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/version_file_win.bat"
 # Certificado A1
-$verificarValidadeCertificadoA1 = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/version_file_win.bat"
+$verificarValidadeCertificadoA1 = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/certificadoA1/verificarValidadeCertificadoA1.bat"
 $userparameter_verificarValidadeCertificadoA1 = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/certificadoA1/userparameter_verificarValidadeCertificadoA1.conf"
 
 
