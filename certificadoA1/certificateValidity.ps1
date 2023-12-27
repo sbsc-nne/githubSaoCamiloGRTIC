@@ -12,7 +12,7 @@ if ($cert) {
 
     if ($outputFormat -eq "datetime") {
         # Exibir a data de expiração no formato "DDMMAAAA HH:MM:SS"
-        $expirationDateFormatted = $expirationDate.ToString("ddMMyyyy HH:mm:ss")
+        $expirationDateFormatted = $expirationDate.ToString("dd/MM/yyyy HH:mm:ss")
         Write-Output $expirationDateFormatted
     } elseif ($outputFormat -eq "daysremaining") {
         # Exibir os dias restantes
