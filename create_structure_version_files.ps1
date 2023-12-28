@@ -4,10 +4,7 @@
 # create_structure_version_files.ps1
 # Script estruturar a verificação das versões de arquivos EXE (Monitoramento Zabbix)
 
-# Variáveis
-#param (
-#    [string]$ipZabbixProxy
-#)
+
 # Solicitar que o usuário informe um valor
 $ipZabbixProxy = Read-Host "Informe o IP do Zabbix Proxy:"
 # Verifica se a primeira variável foi passada
