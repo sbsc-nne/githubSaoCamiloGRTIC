@@ -2,7 +2,8 @@
 # Data Criação: 30-11-2023
 # @Marcelo Grando
 # create_structure_version_files.ps1
-# Script estruturar a verificação das versões de arquivos EXE (Monitoramento Zabbix)
+# Script Instalar Zabbix Agent 2, criar estrutura para verificação das 
+#   versões de arquivos EXE e para Verificar a data de validade do certificado A1
 
 
 # Solicitar que o usuário informe um valor
