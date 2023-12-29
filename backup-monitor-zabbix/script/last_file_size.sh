@@ -29,7 +29,7 @@ fi
 
 # Obtém informações sobre o arquivo mais novo
 tamanho_em_bytes=$(stat -c "%s" "$arquivo_mais_novo")
-tamanho_arquivo=$(echo "scale=2; $tamanho_em_bytes / 1024 / 1024" | bc)
+tamanho_arquivo=$(echo "scale=2; $tamanho_em_bytes / 1024" | bc)
 
 # Exibe as informações
 echo "$tamanho_arquivo"
