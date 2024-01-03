@@ -37,16 +37,16 @@ switch -Wildcard ($version) {
     Default { $os = "Versao nao identificada: $version" }
 }
 
-# Retornar a informação solicitada com base no parâmetro
+# Retornar a informação solicitada com base no parametro
 switch ($infoType) {
-    "NomeSistema" { $result = $osInfo.Caption }
-    "Versao" { $result = $os }
-    "NumeroCompilacao" { $result = $osInfo.BuildNumber }
-    "Arquitetura" { $result = $osInfo.OSArchitecture }
-    "Fabricante" { $result = $osInfo.Manufacturer }
-    "IdiomaCodigo" { $result = $languageCode }
-    "IdiomaDescricao" { $result = $languageDescription }
-    Default { $result = "Parâmetro inválido" }
+    "name_system" { $result = $osInfo.Caption }
+    "version_system" { $result = $os }
+    "compilation_number" { $result = $osInfo.BuildNumber }
+    "architecture" { $result = $osInfo.OSArchitecture }
+    "manufacturer" { $result = $osInfo.Manufacturer }
+    "language_code" { $result = $languageCode }
+    "language_description" { $result = $languageDescription }
+    Default { $result = "Parametro invalido" }
 }
 
 $result
