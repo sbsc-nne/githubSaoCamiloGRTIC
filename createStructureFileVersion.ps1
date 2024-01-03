@@ -43,7 +43,7 @@ $urlUserparameterCertificateValidity = "https://github.com/mgran2003/GITHUB-SAOC
 
 # Certificado A1
 $urlSystemInfo = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/systemInfoWindows/systemInfo.ps1"
-$userparameterSystemInfo = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/blob/main/systemInfoWindows/userparameterSystemInfo.conf"
+$userparameterSystemInfo = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/systemInfoWindows/userparameterSystemInfo.conf"
 
 # Verifica se o servico do Zabbix Agent 2 está instalado. 
 # Se estiver, ele para o servico, exclui o servico, 
