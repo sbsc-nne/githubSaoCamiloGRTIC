@@ -13,9 +13,8 @@ $systemLocale = Get-WinSystemLocale
 
 # Mapeamento de códigos de idioma para descrições
 $languageMappings = @{
-    "ar-SA" = "Arábico (Arábia Saudita)"
-    "en-US" = "Inglês (Estados Unidos)"
-    "pt-BR" = "Português (Brasil)"
+    "en-US" = "Ingles (Estados Unidos)"
+    "pt-BR" = "Portugues (Brasil)"
     # Adicione mais mapeamentos conforme necessário
 }
 
@@ -24,7 +23,7 @@ $languageCode = $systemLocale.Name
 $languageDescription = $languageMappings[$languageCode]
 
 if (-not $languageDescription) {
-    $languageDescription = "Idioma não mapeado: $languageCode"
+    $languageDescription = "Idioma nao mapeado: $languageCode"
 }
 
 $version = $osInfo.Version
@@ -35,7 +34,7 @@ switch -Wildcard ($version) {
     "10.0.14393*" { $os = "Windows Server 2016 (versão 1607)" }
     "10.0.17763*" { $os = "Windows Server 2019" }
     "10.0.19042*" { $os = "Windows Server 2022" }
-    Default { $os = "Versão não identificada: $version" }
+    Default { $os = "Versao nao identificada: $version" }
 }
 
 # Retornar a informação solicitada com base no parâmetro

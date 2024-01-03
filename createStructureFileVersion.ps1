@@ -22,19 +22,28 @@ if (-not $ipSystemaH) {
 $directory1 = "C:\zabbix"
 $directory2 = "C:\zabbix\zabbix_agent2.conf.d"
 $directory3 = "C:\zabbix\script"
+# Urls Zabbix Agent 2
 $urlInstallZabbixAgent2Bat  = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/zabbix-5.0/windows/InstallZabbixAgent2.bat"
 $urlZabbixAgent2Conf        = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/zabbix-5.0/windows/zabbix_agent2.conf"
 $urlZabbixAgent2Exe         = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/zabbix-5.0/windows/zabbix_agent2.exe"
 $urlZabbixGetExe            = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/zabbix-5.0/windows/zabbix_get.exe"
 $urlZabbixSerderExe         = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/zabbix-5.0/windows/zabbix_sender.exe"
-$urlUserParameterFortes     = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/userparameter_version_file_fortes.conf"
-$urlUserParameterSystema    = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/userparameter_version_file_systemah.conf"
-$urlUserParameterWK         = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/userparameter_version_file_wksistemas.conf"
-$urlVersionFileWinBat       = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/version_file_win.bat"
+
+# Urls UserParameter FilesVersion
+$urlUserParameterFortes     = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/userparameterFileVersionFortes.conf"
+$urlUserParameterSystema    = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/userparameterFileVersionSystemah.conf"
+$urlUserParameterWK         = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/userparameterFileVersionWksistemas.conf"
+
+# Urls Script FilesVersion
+$urlFileVersionWin       = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/version_apps/windows/fileVersionWin.ps1"
+
 # Certificado A1
 $urlCertificateValidity = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/certificadoA1/certificateValidity.ps1"
-$urlUserparameterCertificateValidity = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/certificadoA1/userparameter_certificateValidity.conf"
+$urlUserparameterCertificateValidity = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/certificadoA1/userparameterCertificateValidity.conf"
 
+# Certificado A1
+$urlSystemInfo = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/raw/main/systemInfoWindows/systemInfo.ps1"
+$userparameterSystemInfo = "https://github.com/mgran2003/GITHUB-SAOCAMILO-GRTIC/blob/main/systemInfoWindows/userparameterSystemInfo.conf"
 
 # Verifica se o servico do Zabbix Agent 2 está instalado. 
 # Se estiver, ele para o servico, exclui o servico, 
@@ -143,11 +152,11 @@ $nameLocalFile = Join-Path $directory2 (Split-Path $urlUserParameterWK -Leaf)
 Write-Host "Iniciando download do arquivo: $nameLocalFile"
 Invoke-WebRequest -Uri $urlUserParameterWK -OutFile $nameLocalFile
 
-# Nome do arquivo local (extraído do URL) $urlVersionFileWinBat
-$nameLocalFile = Join-Path $directory3 (Split-Path $urlVersionFileWinBat -Leaf)
-# Baixa o arquivo e salva localmente $urlVersionFileWinBat
+# Nome do arquivo local (extraído do URL) $urlFileVersionWin
+$nameLocalFile = Join-Path $directory3 (Split-Path $urlFileVersionWin -Leaf)
+# Baixa o arquivo e salva localmente $urlFileVersionWin
 Write-Host "Iniciando download do arquivo: $nameLocalFile"
-Invoke-WebRequest -Uri $urlVersionFileWinBat -OutFile $nameLocalFile
+Invoke-WebRequest -Uri $urlFileVersionWin -OutFile $nameLocalFile
 
 # Nome do arquivo local (extraído do URL) $urlCertificateValidity
 $nameLocalFile = Join-Path $directory3 (Split-Path $urlCertificateValidity -Leaf)
@@ -160,6 +169,18 @@ $nameLocalFile = Join-Path $directory2 (Split-Path $urlUserparameterCertificateV
 # Baixa o arquivo e salva localmente $urlUserparameterCertificateValidity
 Write-Host "Iniciando download do arquivo: $nameLocalFile"
 Invoke-WebRequest -Uri $urlUserparameterCertificateValidity -OutFile $nameLocalFile
+
+# Nome do arquivo local (extraído do URL) $urlSystemInfo
+$nameLocalFile = Join-Path $directory3 (Split-Path $urlSystemInfo -Leaf)
+# Baixa o arquivo e salva localmente $urlSystemInfo
+Write-Host "Iniciando download do arquivo: $nameLocalFile"
+Invoke-WebRequest -Uri $urlSystemInfo -OutFile $nameLocalFile
+
+# Nome do arquivo local (extraído do URL) $userparameterSystemInfo
+$nameLocalFile = Join-Path $directory2 (Split-Path $userparameterSystemInfo -Leaf)
+# Baixa o arquivo e salva localmente $userparameterSystemInfo
+Write-Host "Iniciando download do arquivo: $nameLocalFile"
+Invoke-WebRequest -Uri $userparameterSystemInfo -OutFile $nameLocalFile
 
 # ### Configurar os parametros no arquivo zabbix_agent2.conf
 $linha1 = 69  # Server=
@@ -194,7 +215,7 @@ if ($linha2 -ge 1 -and $linha2 -le $linhas.Count) {
 
 # Incluir a chave no UserParameter para ver versão do SystemaH2005
 $caminhoExeSystemaH = "\\$ipSystemaH\SystemaH2005\modulos\syscad.exe"
-$textoParaAdicionar = @("","UserParameter=version_systemah, C:\zabbix\script\version_file_win.bat $($caminhoExeSystemaH)")
+$textoParaAdicionar = @("","UserParameter=version_systemah, powershell -ExecutionPolicy Bypass -File 'C:\zabbix\script\fileVersionWin.ps1' $($caminhoExeSystemaH)")
 
 # Adiciona o texto ao final do arquivo
 Add-Content -Path $nameUserParameterSystema -Value $textoParaAdicionar
