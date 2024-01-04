@@ -273,3 +273,7 @@ Write-Host "Instalando o Zabbix Agent 2 com servico..."
 # Executar o arquivo .bat
 Start-Process -FilePath $nameFileInstallZabbixAgent2Bat -Wait
 Write-Host "Instalacao do Zabbix Agent 2 concluida."
+
+Start-Sleep -s 2
+
+Start-Service services.msc
