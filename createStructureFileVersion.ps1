@@ -8,15 +8,24 @@
 
 # Solicitar que o usuário informe um valor
 $ipZabbixProxy = Read-Host "Informe o IP do Zabbix Proxy:"
-# Verifica se a primeira variável foi passada
+# Verifica se a variável foi informada
 if (-not $ipZabbixProxy) {
     Write-Host "IP do servidor do Zabbix Proxy não foi informado. O script será encerrado."
     exit
 }
+
 $ipSystemaH = Read-Host "Informe o IP do Servidor do SystemaH2005:"
+# Verifica se a variável foi informada
 if (-not $ipSystemaH) {
     Write-Host "IP do servidor do SystemaH não foi informado. O script será encerrado."
     exit
+}
+
+$folderSystemaInput = Read-Host "Digite o nome da pasta do SystemaH(Deixar em branco se a pasta for SystemaH2005)"
+if ($folderSystemaInput -eq "") {
+    $folderSystema = "SystemaH2005"
+} else {
+    $folderSystema = $folderSystemaInput
 }
 
 $directory1 = "C:\zabbix"
@@ -214,7 +223,7 @@ if ($linha2 -ge 1 -and $linha2 -le $linhas.Count) {
 }
 
 # Incluir a chave no UserParameter para ver versão do SystemaH2005
-$caminhoExeSystemaH = "\\$ipSystemaH\SystemaH2005\modulos\syscad.exe"
+$caminhoExeSystemaH = "\\$ipSystemaH\$folderSystema\modulos\syscad.exe"
 $textoParaAdicionar = @("","UserParameter=version_systemah, powershell -ExecutionPolicy Bypass -File ""C:\zabbix\script\fileVersionWin.ps1"" $($caminhoExeSystemaH)")
 
 # Adiciona o texto ao final do arquivo
