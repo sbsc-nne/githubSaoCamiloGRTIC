@@ -229,7 +229,17 @@ Write-Host "Instalacao do Zabbix Agent 2 concluida."
 Start-Sleep -s 2
 
 # Abre as portas de entrada e saída no Firewall do Windows
-$ports = @(10050)
+
+# Solicitação da porta ao usuário
+$portInput = Read-Host "Digite a porta desejada (deixe em branco para usar a porta padrão 10050)"
+if ($portInput -eq "") {
+    $port = 10050
+} else {
+    $port = [int]$portInput
+}
+
+# Abre as portas de entrada e saída no Firewall do Windows
+$ports = @($port)
 
 # Itera sobre as portas e adiciona exceções no Firewall
 foreach ($port in $ports) {
