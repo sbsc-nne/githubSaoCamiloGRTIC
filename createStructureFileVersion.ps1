@@ -215,7 +215,7 @@ if ($linha2 -ge 1 -and $linha2 -le $linhas.Count) {
 
 # Incluir a chave no UserParameter para ver versão do SystemaH2005
 $caminhoExeSystemaH = "\\$ipSystemaH\SystemaH2005\modulos\syscad.exe"
-$textoParaAdicionar = @("","UserParameter=version_systemah, powershell -ExecutionPolicy Bypass -File 'C:\zabbix\script\fileVersionWin.ps1' $($caminhoExeSystemaH)")
+$textoParaAdicionar = @("","UserParameter=version_systemah, powershell -ExecutionPolicy Bypass -File ""C:\zabbix\script\fileVersionWin.ps1"" $($caminhoExeSystemaH)")
 
 # Adiciona o texto ao final do arquivo
 Add-Content -Path $nameUserParameterSystema -Value $textoParaAdicionar
