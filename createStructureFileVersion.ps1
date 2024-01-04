@@ -191,50 +191,6 @@ $nameLocalFile = Join-Path $directory2 (Split-Path $userparameterSystemInfo -Lea
 Write-Host "Iniciando download do arquivo: $nameLocalFile"
 Invoke-WebRequest -Uri $userparameterSystemInfo -OutFile $nameLocalFile
 
-# ### Configurar os parametros no arquivo zabbix_agent2.conf
-$linha1 = 69  # Server=
-$linha2 = 109 # ServerActive=
-
-$conteudoLinha1 = "Server=" + $ipZabbixProxy
-$conteudoLinha2 = "ServerActive=" + $ipZabbixProxy
-
-# Lê o conteúdo do arquivo
-$linhas = Get-Content -Path $nameFileZabbixAgentConf
-
-# Verifica se o número da linha é válido
-if ($linha1 -ge 1 -and $linha1 -le $linhas.Count) {
-    # Modifica a linha desejada
-    $linhas[$linha1 - 1] = $conteudoLinha1
-    # Escreve o conteúdo modificado de volta no arquivo
-    $linhas | Set-Content -Path $nameFileZabbixAgentConf
-    Write-Host "Arquivo $nameFileZabbixAgentConf modificado com sucesso."
-} else {
-    Write-Host "Numero de linha invalido."
-}
-
-if ($linha2 -ge 1 -and $linha2 -le $linhas.Count) {
-    # Modifica a linha desejada
-    $linhas[$linha2 - 1] = $conteudoLinha2
-    # Escreve o conteúdo modificado de volta no arquivo
-    $linhas | Set-Content -Path $nameFileZabbixAgentConf
-    Write-Host "Arquivo $nameFileZabbixAgentConf modificado com sucesso."
-} else {
-    Write-Host "Numero de linha invalido."
-}
-
-# Incluir a chave no UserParameter para ver versão do SystemaH2005
-$caminhoExeSystemaH = "\\$ipSystemaH\$folderSystema\modulos\syscad.exe"
-$textoParaAdicionar = @("","UserParameter=version_systemah, powershell -ExecutionPolicy Bypass -File ""C:\zabbix\script\fileVersionWin.ps1"" $($caminhoExeSystemaH)")
-
-# Adiciona o texto ao final do arquivo
-Add-Content -Path $nameUserParameterSystema -Value $textoParaAdicionar
-
-# ####Instalar o servico do Zabbix Agent através do arquivo .bat ####
-Write-Host "Instalando o Zabbix Agent 2 com servico..."
-# Executar o arquivo .bat
-Start-Process -FilePath $nameFileInstallZabbixAgent2Bat -Wait
-Write-Host "Instalacao do Zabbix Agent 2 concluida."
-
 Start-Sleep -s 2
 
 # Abre as portas de entrada e saída no Firewall do Windows
@@ -260,3 +216,60 @@ foreach ($port in $ports) {
 }
 
 Write-Host "Portas $ports liberadas no Firewall do Windows."
+
+# ### Configurar os parametros no arquivo zabbix_agent2.conf
+$linha1 = 69  # Server=
+$linha2 = 77  # ListenPort=10050
+$linha3 = 109 # ServerActive=
+
+
+$conteudoLinha1 = "Server=" + $ipZabbixProxy
+$conteudoLinha2 = "ListenPort=" + $ports
+$conteudoLinha3 = "ServerActive=" + $ipZabbixProxy
+
+# Lê o conteúdo do arquivo
+$linhas = Get-Content -Path $nameFileZabbixAgentConf
+
+# Verifica se o número da linha é válido
+if ($linha1 -ge 1 -and $linha1 -le $linhas.Count) {
+    # Modifica a linha desejada
+    $linhas[$linha1 - 1] = $conteudoLinha1
+    # Escreve o conteúdo modificado de volta no arquivo
+    $linhas | Set-Content -Path $nameFileZabbixAgentConf
+    Write-Host "Arquivo $nameFileZabbixAgentConf modificado com sucesso."
+} else {
+    Write-Host "Numero de linha invalido."
+}
+
+if ($linha2 -ge 1 -and $linha2 -le $linhas.Count) {
+    # Modifica a linha desejada
+    $linhas[$linha2 - 1] = $conteudoLinha2
+    # Escreve o conteúdo modificado de volta no arquivo
+    $linhas | Set-Content -Path $nameFileZabbixAgentConf
+    Write-Host "Arquivo $nameFileZabbixAgentConf modificado com sucesso."
+} else {
+    Write-Host "Numero de linha invalido."
+}
+
+if ($linha3 -ge 1 -and $linha3 -le $linhas.Count) {
+    # Modifica a linha desejada
+    $linhas[$linha3 - 1] = $conteudoLinha3
+    # Escreve o conteúdo modificado de volta no arquivo
+    $linhas | Set-Content -Path $nameFileZabbixAgentConf
+    Write-Host "Arquivo $nameFileZabbixAgentConf modificado com sucesso."
+} else {
+    Write-Host "Numero de linha invalido."
+}
+
+# Incluir a chave no UserParameter para ver versão do SystemaH2005
+$caminhoExeSystemaH = "\\$ipSystemaH\$folderSystema\modulos\syscad.exe"
+$textoParaAdicionar = @("","UserParameter=version_systemah, powershell -ExecutionPolicy Bypass -File ""C:\zabbix\script\fileVersionWin.ps1"" $($caminhoExeSystemaH)")
+
+# Adiciona o texto ao final do arquivo
+Add-Content -Path $nameUserParameterSystema -Value $textoParaAdicionar
+
+# ####Instalar o servico do Zabbix Agent através do arquivo .bat ####
+Write-Host "Instalando o Zabbix Agent 2 com servico..."
+# Executar o arquivo .bat
+Start-Process -FilePath $nameFileInstallZabbixAgent2Bat -Wait
+Write-Host "Instalacao do Zabbix Agent 2 concluida."
