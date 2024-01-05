@@ -276,8 +276,8 @@ Write-Host "Instalando o Zabbix Agent 2 com servico..."
 Start-Sleep -s 2
 
 # Solicitar o nome de usuário e senha para o serviço
-$serviceUserName = Read-Host "Digite o nome de usuário para o serviço"
-$servicePassword = Read-Host "Digite a senha para o serviço" -AsSecureString
+$serviceUserName = Read-Host "Digite o nome de usuário para o servico"
+$servicePassword = Read-Host "Digite a senha para o servico" -AsSecureString
 
 # Ocultar a pasta do Zabbix Agent
 attrib +s +h "C:\zabbix"
