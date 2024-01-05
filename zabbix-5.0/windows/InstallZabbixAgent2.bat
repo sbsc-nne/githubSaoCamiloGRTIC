@@ -1,22 +1,7 @@
 @echo off
-setlocal enabledelayedexpansion
 
 set /p "serviceUserName=Digite o nome de usuario para o servico: "
-
-set "servicePassword="
-set "mask=*"
-
-:inputLoop
-set "char="
-set /p "char=Digite a senha para o serviço: "
-
-if not defined char goto inputComplete
-set "servicePassword=!servicePassword!!char!"
-<nul set /p "=!mask!"
-goto inputLoop
-
-:inputComplete
-echo.
+set /p "servicePassword=Digite a senha para o servico: "
 
 echo "== Ocultar a pasta do Zabbix Agent =="
 attrib +s +h "C:\zabbix"
