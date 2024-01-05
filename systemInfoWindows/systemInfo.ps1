@@ -29,6 +29,7 @@ if (-not $languageDescription) {
 $version = $osInfo.Version
 
 switch -Wildcard ($version) {
+    "6.2.9*" { $os = "Windows Server 2012" }
     "6.3*" { $os = "Windows Server 2012 R2" }
     "10.0*" { $os = "Windows Server 2016" }
     "10.0.14393*" { $os = "Windows Server 2016 (versão 1607)" }
