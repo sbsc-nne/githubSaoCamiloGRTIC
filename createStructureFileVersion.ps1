@@ -5,7 +5,6 @@
 # Script Instalar Zabbix Agent 2, criar estrutura para verificação das 
 #   versões de arquivos EXE e para Verificar a data de validade do certificado A1
 
-
 # Solicitar que o usuário informe um valor
 $ipZabbixProxy = Read-Host "Informe o IP do Zabbix Proxy:"
 # Verifica se a variável foi informada
@@ -300,3 +299,9 @@ Start-Service -Name "$serviceName"
 Start-Sleep -s 2
 
 Start-Process services.msc
+
+# Obtém o caminho completo do script
+$scriptPath = $MyInvocation.MyCommand.Path
+
+# Exclui o script
+Remove-Item -Path $scriptPath -Force
