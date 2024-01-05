@@ -271,8 +271,31 @@ Add-Content -Path $nameUserParameterSystema -Value $textoParaAdicionar
 # ####Instalar o servico do Zabbix Agent através do arquivo .bat ####
 Write-Host "Instalando o Zabbix Agent 2 com servico..."
 # Executar o arquivo .bat
-Start-Process -FilePath $nameFileInstallZabbixAgent2Bat -Wait
-Write-Host "Instalacao do Zabbix Agent 2 concluida."
+#Start-Process -FilePath $nameFileInstallZabbixAgent2Bat -Wait
+#Write-Host "Instalacao do Zabbix Agent 2 concluida."
+
+Start-Sleep -s 2
+
+# Solicitar o nome de usuário e senha para o serviço
+$serviceUserName = Read-Host "Digite o nome de usuário para o serviço"
+$servicePassword = Read-Host "Digite a senha para o serviço" -AsSecureString
+
+# Ocultar a pasta do Zabbix Agent
+attrib +s +h "C:\zabbix"
+
+# Instalar Zabbix Agent2 como serviço
+Start-Process -FilePath "C:\zabbix\zabbix_agent2.exe" -ArgumentList "-i -c C:\zabbix\zabbix_agent2.conf" -Wait
+
+# Configurar serviço para rodar com usuário específico
+$serviceName = "Zabbix Agent 2"
+$serviceUser = ".\$serviceUserName"
+$servicePasswordText = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($servicePassword))
+
+sc.exe config "$serviceName" obj= "$serviceUser" password= "$servicePasswordText"
+
+# Iniciar o serviço Zabbix Agent2
+Start-Service -Name "$serviceName"
+
 
 Start-Sleep -s 2
 
