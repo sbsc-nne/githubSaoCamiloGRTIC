@@ -276,4 +276,4 @@ Write-Host "Instalacao do Zabbix Agent 2 concluida."
 
 Start-Sleep -s 2
 
-Start-Service services.msc
+Start-Process services.msc
