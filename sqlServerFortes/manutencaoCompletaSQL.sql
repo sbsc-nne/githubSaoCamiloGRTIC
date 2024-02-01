@@ -122,7 +122,6 @@ Order by  avg_fragmentation_in_percent desc;
 GO
 
 /* Script 10
-
 Quando o resultado aparecer na tela, a última coluna é a porcentagem (%) de fragmentação dos índices. 
 A Microsoft orienta que seja, no máximo, 30%. Se passar desse valor, execute o script de reorganização de índices. 
 Script de reorganização de índices:
@@ -177,7 +176,7 @@ WHILE @@FETCH_STATUS = 0
 CLOSE FragmentedTableList 
 DEALLOCATE FragmentedTableList
 
-/* Script 10
+/* Script 11
 Reindexação de Tabelas:
 */
 USE SeuBancoDeDados;
@@ -199,13 +198,13 @@ END
 CLOSE TableCursor;
 DEALLOCATE TableCursor;
 
-/* Script 11
+/* Script 12
 Atualização de Estatísticas:
 */
 USE SeuBancoDeDados;
 EXEC sp_updatestats;
 
-/* Script 12
+/* Script 13
 Verificar a quantidade de registros da tabela AUD = Auditoria.
 */
 SELECT 
@@ -213,7 +212,8 @@ SELECT
 FROM 
 	AUD
 WHERE AUD.DataHora < '2022-12-31'
-/* Script 12
+
+/* Script 14
 Limpar a tabela de Auditoria MANTER BACKUP DO BANCO PARA CONSULTAS DE LOG DO PASSADO
 */
 
