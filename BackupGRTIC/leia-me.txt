@@ -1,0 +1,34 @@
+# Orientações de uso da Aplicação BackupGRTIC.
+# Elaborado por: Marcelo Grando.
+# Data ultima revisão: 18/10/2022
+
+BackupGRTIC.exe é um aplicativo que deve ser usado para realizar 
+cópias de segurança compactadas e criptografadas.
+
+Orientamos usar a seguinte estrutura de pastas:
+C:\BackupGRTIC\
+
+O uso desse aplicativo é restrito a Sociedade Beneficente São Camilo
+Regional Norte Nordeste.
+
+Orientações de uso:
+O aplicativo BackupGRTIC.exe deve ser executado informando 5 parâmetros na seguinte ordem:
+[1] - Arquivo ou Diretório de Origem
+[2] - Diretório de destino.
+[3] - Endereço(s) de email para envio de informações da execução do Backup.
+    - para mais de um endereço usar (,) vírgula como separador.
+    - ex: "mail1@mail.com,mail2@mail.com"
+[4] - Subject (titulo) do email a ser enviado. 
+    - Importante identificar o Departamento e Arquivo que esta copiando.
+    - ex: "SUPER | Backup WKSistemas | Pasta dados"
+[5] - Quantidade máxima de backups a ser mantido. Orientamos manter no mímimo 7 backups.
+    - Esse parametro deve ser levado em consideração espaço em de armazenamento na Storage.
+
+Como executar:
+Orientamos criar um arquivo em lote (.bat) executando o arquivo BackupGRTIC.exe passando os parâmetros
+Ex: Criar o arquivo Backup_FortesAC.bat em C:\BackupGRTIC
+Conteudo do arquivo:
+cd C:\BackupGRTIC
+BackupGRTIC.exe "c:\origem" "d:\destino" "mail1@mail.com,mail2@mail.com" "SUPER | Backup WKSistemas | Pasta dados" "7"
+
+O arquivo em lote (.bat) pode ser chamado através de uma tarefa agendada.
