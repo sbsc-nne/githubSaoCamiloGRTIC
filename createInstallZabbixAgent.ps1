@@ -215,13 +215,6 @@ attrib +s +h "C:\zabbix"
 # Instalar Zabbix Agent2 como serviço
 Start-Process -FilePath "C:\zabbix\zabbix_agent2.exe" -ArgumentList "-i -c C:\zabbix\zabbix_agent2.conf" -Wait
 
-# Configurar serviço para rodar com usuário específico
-$serviceName = "Zabbix Agent 2"
-$serviceUser = ".\$serviceUserName"
-$servicePasswordText = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($servicePassword))
-
-sc.exe config "$serviceName" obj= "$serviceUser" password= "$servicePasswordText"
-
 # Iniciar o serviço Zabbix Agent2
 Start-Service -Name "$serviceName"
 
