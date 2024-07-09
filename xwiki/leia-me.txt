@@ -1,0 +1,14 @@
+
+O arquivo install_xwiki_15.sh tem o passo a passo para:
+1 - Instalar o Xwiki 15, com Jetty e Banco postgresql.
+2 - Iniciar o Jetty 10 como serviço no Ubuntu 24.04, você pode criar um serviço systemd
+3 - Configurar um proxy reverso com HTTPS usando o Apache para um servidor Jetty
+    OBS.: É necessário ter um certificado SSL Wildcard válido para o dominio saocamilonortenordeste.org.br
+
+Após instalado e configurado, é necessário habilitar o o NAT no Firewall, no caso do Fortigate de Fortaleza foi criado 
+"Policy & Objects > Virtual IPs" VIP_WIRELINK_XWIKI_SUPER 186.225.48.158 -> 10.10.50.5 (TCP: 443 -> 443)
+"Policy & Objects > Firewall Policy" virtual-wan-link -> TRANSITO-MK Regra 103 - REGRA REDIREC. P/ WEB (SUPER)
+
+O arquivo index.html deverá substituir o arquivo /opt/java/jetty-base/webapps/root/index.html 
+para fazer o redirecionamento para o xwiki.
+É necessário upar a logomarca em /opt/java/jetty-base/webapps/root/logo.svg
