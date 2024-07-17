@@ -1,0 +1,30 @@
+{{velocity}}
+#panelheader('Unidades')
+#set ($menuItems = [
+  {"label": "Ananindeua", "url": "https://xwiki.saocamilonortenordeste.org.br/xwiki/wiki/ananindeua/view/Main/"},
+  {"label": "Balsas", "url": "https://xwiki.saocamilonortenordeste.org.br/xwiki/wiki/balsas/view/Main/"},
+  {"label": "Crateús", "url": "https://xwiki.saocamilonortenordeste.org.br/xwiki/wiki/crateus/view/Main/"},
+  {"label": "Crato", "url": "https://xwiki.saocamilonortenordeste.org.br/xwiki/wiki/crato/view/Main/"},
+  {"label": "Fortaleza", "url": "https://xwiki.saocamilonortenordeste.org.br/xwiki/wiki/fortaleza/view/Main/"},
+  {"label": "Itapipoca", "url": "https://xwiki.saocamilonortenordeste.org.br/xwiki/wiki/itapipoca/view/Main/"},
+  {"label": "Limoeiro", "url": "https://xwiki.saocamilonortenordeste.org.br/xwiki/wiki/limoeirodonorte/view/Main/"},
+  {"label": "Macapá", "url": "https://xwiki.saocamilonortenordeste.org.br/xwiki/wiki/macapa/view/Main/"},
+  {"label": "Pedro II", "url": "https://xwiki.saocamilonortenordeste.org.br/xwiki/wiki/pedroii/view/Main/"},
+  {"label": "Santarém", "url": "https://xwiki.saocamilonortenordeste.org.br/xwiki/wiki/santarem/view/Main/"},
+  {"label": "São Gonçalo", "url": "https://xwiki.saocamilonortenordeste.org.br/xwiki/wiki/saogoncalodoamarante/view/Main/"},
+  {"label": "Tauá", "url": "https://xwiki.saocamilonortenordeste.org.br/xwiki/wiki/taua/view/Main/"},
+  {"label": "Tianguá", "url": "https://xwiki.saocamilonortenordeste.org.br/xwiki/wiki/tiangua/view/Main/"},
+  {"label": "UPA - Crateús", "url": "https://xwiki.saocamilonortenordeste.org.br/xwiki/wiki/upacrateus/view/Main/"},
+  {"label": "UPA - Tauá", "url": "https://xwiki.saocamilonortenordeste.org.br/xwiki/wiki/upataua/view/Main/"}
+])
+
+## Use wiki syntax for HTML to ensure correct rendering
+{{html clean="false"}}
+<ul>
+#foreach ($item in $menuItems)
+  <li><a href="$item.url" target="_blank">$item.label</a></li>
+#end
+</ul>
+{{/html}}
+#panelfooter()
+{{/velocity}}

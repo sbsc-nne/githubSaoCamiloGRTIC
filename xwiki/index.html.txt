@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - XWiki</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+        .login-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 300px;
+        }
+        .login-container img {
+            width: 250px;
+            margin-bottom: 20px;
+        }
+        .login-container input {
+            width: 93%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px; 
+        }
+        .login-container select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #c3000a;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .login-container button:disabled {
+            background-color: #999;
+            cursor: not-allowed;
+        }
+        .header-container img {
+            width: 290px;
+            margin-bottom: 0px;
+        }
+        header, footer {
+            width: 100%;
+            background-color: #c3000a;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+        }
+        header {
+            top: 0;
+        }
+        footer {
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <img src="logo-white.png" alt="Sao Camilo">
+        </div>
+    </header>
+
+    <div class="login-container">
+        <form id="loginForm">
+            <h3><font color="#c3000a">Acesso a Plataforma XWIKI<br><br>Regional Norte Nordeste</font></h3>            
+            <select id="wikiSelect">
+                <option value="selecione">-- Selecione a Unidade --</option>    
+                <option value="superintendencia">Superintendência N/NE</option>
+                <option value="ananindeua">Ananindeua - PA</option>
+                <option value="balsas">Balsas - MA</option>
+                <option value="crateus">Crateús - CE</option>
+                <option value="crato">Crato - CE</option>
+                <option value="fortaleza">Fortaleza - CE</option>
+                <option value="itapipoca">Balsas</option>
+                <option value="limoeirodonorte">Limoeiro do Norte - CE</option>
+                <option value="macapa">Macapá - AP</option>
+                <option value="pedroii">Pedro II - PI</option>
+                <option value="santarem">Santarém - PA</option>
+                <option value="saogoncalodoamarante">São Gonçalo do Amarante - RN</option>
+                <option value="taua">Tauá - CE</option>
+                <option value="tiangua">Tianguá - CE</option>
+                <option value="upacrateus">UPA Crateús - CE</option>
+                <option value="upataua">UPA Tauá - CE</option>
+            </select>
+            <input type="text" id="username" placeholder="Usuário" required>
+            <input type="password" id="password" placeholder="Senha" required>
+            <button type="submit" disabled>Login</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Sociedade Beneficente São Camilo. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        const wikiSelect = document.getElementById('wikiSelect');
+        const loginButton = document.querySelector('button[type="submit"]');
+
+        wikiSelect.addEventListener('change', function() {
+            if (wikiSelect.value === 'selecione') {
+                loginButton.disabled = true;
+            } else {
+                loginButton.disabled = false;
+            }
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const wiki = document.getElementById('wikiSelect').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            fetch(`https://xwiki.saocamilonortenordeste.org.br/xwiki/bin/loginsubmit/XWiki/XWikiLogin`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `j_username=${username}&j_password=${password}`
+            }).then(response => {
+                if (response.ok) {
+                    window.location.href = `https://xwiki.saocamilonortenordeste.org.br/xwiki/wiki/${wiki}/view/Main/`;
+                } else {
+                    alert('Login falhou. Verifique suas credenciais.');
+                }
+            }).catch(error => {
+                console.error('Erro:', error);
+                alert('Ocorreu um erro ao tentar fazer login.');
+            });
+        });
+
+        // Inicializar estado do botão ao carregar a página
+        if (wikiSelect.value === 'selecione') {
+            loginButton.disabled = true;
+        } else {
+            loginButton.disabled = false;
+        }
+    </script>
+</body>
+</html>
+

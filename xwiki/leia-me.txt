@@ -9,6 +9,11 @@ Após instalado e configurado, é necessário habilitar o o NAT no Firewall, no 
 "Policy & Objects > Virtual IPs" VIP_WIRELINK_XWIKI_SUPER 186.225.48.158 -> 10.10.50.5 (TCP: 443 -> 443)
 "Policy & Objects > Firewall Policy" virtual-wan-link -> TRANSITO-MK Regra 103 - REGRA REDIREC. P/ WEB (SUPER)
 
-O arquivo index.html deverá substituir o arquivo /opt/java/jetty-base/webapps/root/index.html 
+(MUDAR ARQUIVO)O arquivo index.html deverá substituir o arquivo /opt/java/jetty-base/webapps/root/index.html 
 para fazer o redirecionamento para o xwiki.
-É necessário upar a logomarca em /opt/java/jetty-base/webapps/root/logo.svg
+(MUDAR LOGO) - É necessário upar a logomarca em /opt/java/jetty-base/webapps/root/logo.svg
+Arquivo /opt/java/jetty-base/webapps/xwiki/templates/registerinline.vm
+Arquivo /opt/java/jetty-base/webapps/xwiki/skins/flamingo/drawer.vm
+
+Menu Unidades
+Arquivo menu_unidaes.txt possui código fonte para criação de um menu para acessar as Unidades

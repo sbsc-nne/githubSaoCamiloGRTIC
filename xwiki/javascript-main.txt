@@ -1,0 +1,17 @@
+Adicionando JavaScript diretamente na página
+- Acesse o XWiki e faça login com uma conta que tenha permissões de edição.
+- Navegue até a página principal (Main) do XWiki.
+- Clique em "Editar" para modificar o conteúdo da página.
+- Selecione o modo de edição em "Wiki" (se disponível).
+- Adicione o script JavaScript dentro de uma macro HTML para garantir que ele seja executado:
+
+{{html}}
+<script type="text/javascript">
+    (function() {
+        var redirectUrl = "https://xwiki.saocamilonortenordeste.org.br";
+        if (window.location.pathname === '/xwiki/bin/view/Main/') {
+            window.location.href = redirectUrl;
+        }
+    })();
+</script>
+{{/html}}
