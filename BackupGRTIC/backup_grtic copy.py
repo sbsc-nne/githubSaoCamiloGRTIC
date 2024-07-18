@@ -20,7 +20,7 @@ def enviare_mail(send_mail_to,msg_email_body):
     message = msg_email_body
 
     # setup the parameters of the message
-    password = "wlhqrpzcfqarjncm" # senha de APP
+    password = "<verificar Atena>" # senha de APP
     msg['From'] = "noreply@saocamilonortenordeste.org.br"
     msg['To'] = send_mail_to
     msg['Subject'] = var_subject_email # Nome do Backup
@@ -80,7 +80,7 @@ try:
         mode='w', 
         compression=pyzipper.ZIP_LZMA, 
         encryption=pyzipper.WZ_AES)
-    zip_file.setpassword(b'B4ckup!@2022##')
+    zip_file.setpassword(b'<Verificar Atena>')
     if object_to_backup_path.is_file():
         # Se o objeto a ser escrito for um arquivo, escreva o arquivo
         zip_file.write(
