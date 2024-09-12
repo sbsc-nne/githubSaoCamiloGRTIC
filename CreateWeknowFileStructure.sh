@@ -34,7 +34,9 @@ TEXT_TO_ADD="
 # fi
 
 # Adiciona o texto após as 2 linhas em branco
-echo -e "$TEXT_TO_ADD" >> "$SMB_CONF"
+echo  "" >> "$SMB_CONF"
+echo  "" >> "$SMB_CONF"
+echo  "$TEXT_TO_ADD" >> "$SMB_CONF"
 
 # Reinicia o serviço do Samba para aplicar as mudanças (opcional)
 # sudo systemctl restart smbd
