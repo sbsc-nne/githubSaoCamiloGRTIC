@@ -4,7 +4,6 @@
 # dir = /tmp/CreateWeknowFileStructure.sh
 # Criar estrutura de para receber arquivos para Weknow
 
-
 # Criar pastas
 mkdir /home/weknow
 mkdir /home/weknow/FortesDemonstrativos
