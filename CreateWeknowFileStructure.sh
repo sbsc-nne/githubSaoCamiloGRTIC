@@ -28,11 +28,10 @@ TEXT_TO_ADD="
         write list = weknow
         read list = weknow
 "
-
 # Verifica se existem pelo menos 2 linhas em branco no final e adiciona se necessário
-if ! grep -qP '\n\s*\n\s*$' "$SMB_CONF"; then
-    echo -e "\n\n" >> "$SMB_CONF"
-fi
+# if ! grep -qP '\n\s*\n\s*$' "$SMB_CONF"; then
+#     echo -e "\n\n" >> "$SMB_CONF"
+# fi
 
 # Adiciona o texto após as 2 linhas em branco
 echo -e "$TEXT_TO_ADD" >> "$SMB_CONF"
