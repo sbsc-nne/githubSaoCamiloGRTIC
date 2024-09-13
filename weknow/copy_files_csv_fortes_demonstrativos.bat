@@ -26,9 +26,9 @@ exit /b
 REM Função que valida o acesso à pasta e realiza a cópia
 :copiar
 if exist "%~1\" (
-    echo Pasta %~1 acessível. Iniciando cópia...
+    echo Pasta %~1 acessivel. Iniciando copia...
     copy "%~1\*" %DESTINO%
 ) else (
-    echo ERRO: Pasta %~1 não está acessível.
+    echo ERRO: Pasta %~1 nao esta acessivel.
 )
  
