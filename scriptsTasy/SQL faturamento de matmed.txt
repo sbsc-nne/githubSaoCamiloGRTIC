@@ -1,0 +1,57 @@
+select 
+    a.nr_sequencia,
+    a.nr_atendimento, 
+    a.nr_interno_conta,       
+    obter_dados_atendimento(a.nr_atendimento,'DTA') tipo_atendimento,
+    obter_classificacao_atend(a.nr_atendimento,'D') especialidade,
+    c.ie_status_protocolo,
+    obter_desc_convenio(b.cd_convenio_parametro) ds_convenio,   
+    obter_plano_atendimento(a.nr_atendimento, 'D') ds_plano,    
+    obter_nome_paciente(a.nr_atendimento) nm_paciente,
+    c.dt_mesano_referencia,
+    to_char(b.dt_periodo_inicial, 'dd/mm/yyyy hh24:mi:ss') dt_entrada,
+    to_char(b.dt_periodo_final, 'dd/mm/yyyy hh24:mi:ss') dt_saída,
+    to_char(a.dt_atendimento, 'dd/mm/yyyy hh24:mi:ss') dt_execucao,
+    a.ie_emite_conta,
+    HCD_OBTER_DS_EMITE_CONTA(a.ie_emite_conta) ds_grupo_fat,
+    a.nr_seq_proc_pacote,
+    a.cd_material,
+    a.cd_material_convenio,
+    obter_desc_material(a.cd_material) ds_material, 
+    a.cd_unidade_medida as cd_unidade_medida_dispensacao,
+    a.cd_unid_medida_conv,
+    h.cd_unidade_convenio as cd_unid_regra_faturamento,
+    --h.dt_atualizacao as dt_atualizacao_regra_fat,
+    NVL (NVL (h.cd_unidade_convenio, a.cd_unid_medida_conv), a.cd_unidade_medida) as cd_unid_conta_pac,
+    OBTER_DADOS_MATERIAL(a.cd_material, 'UMC') cd_unid_medida_custo,
+    case
+        when OBTER_DADOS_MATERIAL(a.cd_material, 'UMC') = NVL(NVL(h.cd_unidade_convenio, a.cd_unid_medida_conv), a.cd_unidade_medida) then 'OK'
+        else 'VERIFICAR'
+        end as verif_unidade,
+    g.qt_conversao,
+    a.qt_material,
+    a.vl_material, 
+    obter_desc_setor_atend(a.cd_setor_atendimento)
+
+from material_atend_paciente a
+right join conta_paciente b 
+on (b.nr_interno_conta = a.nr_interno_conta)
+left join protocolo_convenio c 
+on (c.nr_seq_protocolo = b.nr_seq_protocolo)
+left join conversao_material_convenio h
+on (a.cd_material = h.cd_material
+and h.cd_material_convenio = a.cd_material_convenio
+and (h.cd_convenio = :cd_convenio or h.cd_convenio is null)
+and h.ie_situacao = 'A'
+and (h.dt_final_vigencia >= sysdate OR h.dt_final_vigencia is null))
+left join material_conversao_unidade g
+on a.cd_material = g.cd_material
+and NVL (NVL (h.cd_unidade_convenio, a.cd_unid_medida_conv), a.cd_unidade_medida) = g.cd_unidade_medida
+
+where a.cd_motivo_exc_conta is null
+and a.ie_emite_conta is not null
+and c.ie_status_protocolo = 2  --conferir protocolo 'definitivo'
+and trunc(b.dt_mesano_referencia) between :dt_inicial and :dt_final
+and a.cd_convenio = 58   --mudar convênio
+and a.ie_emite_conta in (52,53)  --mudar para códigos do grupo de matmed
+and a.nr_seq_proc_pacote is null
